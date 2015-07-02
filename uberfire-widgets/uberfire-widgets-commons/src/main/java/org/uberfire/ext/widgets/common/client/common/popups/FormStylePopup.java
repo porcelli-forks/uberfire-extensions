@@ -23,6 +23,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.ModalBody;
 import org.uberfire.ext.widgets.common.client.common.FormStyleLayout;
 
 /**
@@ -45,7 +46,9 @@ public class FormStylePopup extends BaseModal {
     public FormStylePopup( final String title ) {
         setTitle( title );
         form = new FormStyleLayout();
-        add( uiBinder.createAndBindUi( this ) );
+        add( new ModalBody() {{
+            add( uiBinder.createAndBindUi( FormStylePopup.this ) );
+        }} );
     }
 
     public FormStylePopup( final Image image,
@@ -53,7 +56,9 @@ public class FormStylePopup extends BaseModal {
         setTitle( title );
         form = new FormStyleLayout( image,
                                     title );
-        add( uiBinder.createAndBindUi( this ) );
+        add( new ModalBody() {{
+            add( uiBinder.createAndBindUi( FormStylePopup.this ) );
+        }} );
     }
 
     public FormStylePopup( final ImageResource image,
@@ -61,7 +66,9 @@ public class FormStylePopup extends BaseModal {
         setTitle( title );
         form = new FormStyleLayout( image,
                                     title );
-        add( uiBinder.createAndBindUi( this ) );
+        add( new ModalBody() {{
+            add( uiBinder.createAndBindUi( FormStylePopup.this ) );
+        }} );
     }
 
     public void clear() {

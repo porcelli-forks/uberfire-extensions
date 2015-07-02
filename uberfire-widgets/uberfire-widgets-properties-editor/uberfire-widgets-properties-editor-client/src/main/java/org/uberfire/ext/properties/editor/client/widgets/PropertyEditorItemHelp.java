@@ -16,14 +16,14 @@
 
 package org.uberfire.ext.properties.editor.client.widgets;
 
-import com.github.gwtbootstrap.client.ui.Icon;
-import com.github.gwtbootstrap.client.ui.Popover;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Icon;
+import org.gwtbootstrap3.client.ui.Popover;
 
 public class PropertyEditorItemHelp extends Composite {
 
@@ -43,15 +43,15 @@ public class PropertyEditorItemHelp extends Composite {
         initWidget( uiBinder.createAndBindUi( this ) );
         helpPopoverIcon.getElement().getStyle().setCursor( Style.Cursor.POINTER );
 
-        helpPopoverIcon.addStyleName( "span1 controls" );
+        helpPopoverIcon.addStyleName( "col-md-1 controls" );
     }
 
     public void setHeading( String heading ) {
-        helpPopover.setHeading( heading );
+        helpPopover.setTitle( heading );
     }
 
     public void setText( String text ) {
-        helpPopover.setText( text );
+        helpPopover.setContent( text );
     }
 
 }

@@ -21,7 +21,6 @@ import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import org.jboss.errai.common.client.api.Caller;
@@ -37,6 +36,7 @@ import org.uberfire.client.mvp.UberView;
 import org.uberfire.client.workbench.events.ChangeTitleWidgetEvent;
 import org.uberfire.ext.editor.commons.client.BaseEditor;
 import org.uberfire.ext.editor.commons.client.BaseEditorView;
+import org.uberfire.ext.editor.commons.client.resources.i18n.CommonConstants;
 import org.uberfire.ext.editor.commons.service.support.SupportsCopy;
 import org.uberfire.ext.editor.commons.service.support.SupportsDelete;
 import org.uberfire.ext.editor.commons.service.support.SupportsRename;
@@ -45,7 +45,6 @@ import org.uberfire.ext.plugin.client.perspective.editor.components.popup.AddTag
 import org.uberfire.ext.plugin.client.perspective.editor.generator.PerspectiveEditorGenerator;
 import org.uberfire.ext.plugin.client.perspective.editor.layout.editor.HTMLLayoutDragComponent;
 import org.uberfire.ext.plugin.client.perspective.editor.layout.editor.ScreenLayoutDragComponent;
-import org.uberfire.ext.plugin.client.perspective.editor.util.TagButton;
 import org.uberfire.ext.plugin.client.type.PerspectiveLayoutPluginResourceType;
 import org.uberfire.ext.plugin.event.PluginRenamed;
 import org.uberfire.ext.plugin.model.LayoutEditorModel;
@@ -58,6 +57,7 @@ import org.uberfire.mvp.Command;
 import org.uberfire.mvp.ParameterizedCommand;
 import org.uberfire.mvp.PlaceRequest;
 import org.uberfire.workbench.events.NotificationEvent;
+import org.uberfire.workbench.model.menu.MenuFactory;
 import org.uberfire.workbench.model.menu.Menus;
 
 import static org.uberfire.ext.editor.commons.client.menu.MenuItems.*;
@@ -135,13 +135,17 @@ public class PerspectiveEditorPresenter
     @Override
     protected void makeMenuBar() {
         super.makeMenuBar();
-        menuBuilder.addNewTopLevelMenu( new TagButton( new Command() {
-            @Override
-            public void execute() {
-                AddTag addTag = new AddTag( PerspectiveEditorPresenter.this );
-                addTag.show();
-            }
-        } ) );
+
+        menuBuilder.addNewTopLevelMenu( MenuFactory.newTopLevelMenu( CommonConstants.INSTANCE.Tags() )
+                                                .respondsWith( new Command() {
+                                                    @Override
+                                                    public void execute() {
+                                                        AddTag addTag = new AddTag( PerspectiveEditorPresenter.this );
+                                                        addTag.show();
+                                                    }
+                                                } )
+                                                .endMenu()
+                                                .build().getItems().get( 0 ) );
     }
 
     @OnMayClose

@@ -79,13 +79,22 @@ public class ShowcaseEntryPoint {
             public void execute() {
                 placeManager.goTo( new DefaultPlaceRequest( "WiresBayesianPerspective" ) );
             }
+        } ).endMenu().newTopLevelMenu( "Extensions" ).respondsWith( new Command() {
+            @Override
+            public void execute() {
+                placeManager.goTo( new DefaultPlaceRequest( "PlugInAuthoringPerspective" ) );
+            }
+        } ).endMenu().newTopLevelMenu( "Apps" ).respondsWith( new Command() {
+            @Override
+            public void execute() {
+                placeManager.goTo( new DefaultPlaceRequest( "AppsPerspective" ) );
+            }
         } ).endMenu().newTopLevelMenu( "Logout" ).position( MenuPosition.RIGHT ).respondsWith( new Command() {
             @Override
             public void execute() {
                 redirect( GWT.getModuleBaseURL() + "uf_logout" );
             }
         } ).endMenu().build();
-
         menubar.addMenus( menus );
     }
 

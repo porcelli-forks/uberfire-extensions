@@ -26,10 +26,12 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.ModalBody;
 import org.jboss.errai.ioc.client.container.IOCBeanDef;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
@@ -110,7 +112,10 @@ public class WizardViewImpl extends BaseModal
                 }
         );
 
-        add( uiBinder.createAndBindUi( this ) );
+        add( new ModalBody() {{
+            add( uiBinder.createAndBindUi( WizardViewImpl.this ) );
+        }} );
+
         add( footer );
     }
 
@@ -173,7 +178,11 @@ public class WizardViewImpl extends BaseModal
     public void setPreferredWidth( final int width ) {
         bodyContainer.setWidth( width + "px" );
         //Sidebar is 200px and GWT-Bootstraps Modal has padding of 15px (left and right)
-        setWidth( width + 230 );
+        //setWidth(  );
+        int newWidth = width + 230;
+
+        this.getElement().getStyle().setProperty("width", newWidth + "px");
+        this.getElement().getStyle().setProperty("marginLeft", ( -newWidth / 2 ) + "px");
     }
 
     public void setPageCompletionState( final int pageIndex,

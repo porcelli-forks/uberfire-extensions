@@ -16,9 +16,6 @@
 
 package org.uberfire.ext.widgets.common.client.tables;
 
-import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
-import com.github.gwtbootstrap.client.ui.resources.ButtonSize;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -26,7 +23,17 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.TabPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.jboss.errai.common.client.api.Caller;
 import org.uberfire.ext.services.shared.preferences.MultiGridPreferencesStore;
 import org.uberfire.ext.services.shared.preferences.UserPreferencesService;
@@ -130,8 +137,8 @@ public class FilterPagedTable<T>
 
         if ( !"base".equals( key ) ) {
             Button close = new Button();
-            close.setIcon( IconType.REMOVE );
-            close.setSize( ButtonSize.MINI );
+            close.setIcon( IconType.TIMES );
+            close.setSize( ButtonSize.EXTRA_SMALL );
             close.setTitle( "close " + gridHeader );
             text.setStyleDependentName( "close", true );
             close.addClickHandler( new ClickHandler() {
@@ -163,7 +170,7 @@ public class FilterPagedTable<T>
 
         panel.setWidth( "30px" );
         panel.setHeight( "25px" );
-        addTableButton.setSize( ButtonSize.MINI );
+        addTableButton.setSize( ButtonSize.EXTRA_SMALL );
         tabPanel.add( new HTML( "Default" ), panel );
     }
 

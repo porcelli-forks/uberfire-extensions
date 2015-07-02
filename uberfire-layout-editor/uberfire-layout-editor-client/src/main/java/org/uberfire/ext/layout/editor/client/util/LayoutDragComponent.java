@@ -1,8 +1,8 @@
 package org.uberfire.ext.layout.editor.client.util;
 
-import com.github.gwtbootstrap.client.ui.Modal;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Modal;
 import org.uberfire.ext.layout.editor.client.structure.EditorWidget;
 
 public abstract class LayoutDragComponent {

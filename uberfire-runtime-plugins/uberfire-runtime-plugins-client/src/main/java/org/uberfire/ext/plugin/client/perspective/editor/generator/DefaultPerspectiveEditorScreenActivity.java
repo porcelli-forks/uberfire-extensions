@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.github.gwtbootstrap.client.ui.Column;
-import com.github.gwtbootstrap.client.ui.FluidContainer;
-import com.github.gwtbootstrap.client.ui.FluidRow;
-import com.github.gwtbootstrap.client.ui.base.DivWidget;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import org.gwtbootstrap3.client.ui.Column;
+import org.gwtbootstrap3.client.ui.Container;
+import org.gwtbootstrap3.client.ui.Row;
 import org.uberfire.client.mvp.PlaceManager;
 import org.uberfire.client.mvp.WorkbenchScreenActivity;
 import org.uberfire.ext.layout.editor.api.editor.ColumnEditor;
@@ -29,6 +29,8 @@ import org.uberfire.workbench.model.Position;
 import org.uberfire.workbench.model.menu.Menus;
 import org.uberfire.workbench.model.toolbar.ToolBar;
 
+import static org.uberfire.ext.layout.editor.client.row.RowView.*;
+
 public class DefaultPerspectiveEditorScreenActivity implements WorkbenchScreenActivity {
 
     private LayoutEditor editor;
@@ -41,7 +43,7 @@ public class DefaultPerspectiveEditorScreenActivity implements WorkbenchScreenAc
 
     private static final Collection<String> TRAITS = Collections.emptyList();
 
-    private FluidContainer mainPanel;
+    private Container mainPanel;
 
     private List<Target> screensToLoad = new ArrayList<Target>();
 
@@ -54,18 +56,19 @@ public class DefaultPerspectiveEditorScreenActivity implements WorkbenchScreenAc
     public void build( LayoutEditor editor ) {
         this.editor = editor;
         this.screensToLoad.clear();
-        mainPanel = new FluidContainer();
+        mainPanel = new Container();
+        mainPanel.setFluid( true );
         mainPanel.getElement().setId( "mainContainer" );
         List<RowEditor> rows = this.editor.getRows();
         extractRows( rows, mainPanel );
     }
 
-    private void extractRows( List<RowEditor> rows,
-                              DivWidget parentWidget ) {
+    private void extractRows( final List<RowEditor> rows,
+                              final ComplexPanel parentWidget ) {
         for ( RowEditor rowEditor : rows ) {
-            FluidRow row = new FluidRow();
+            Row row = new Row();
             for ( ColumnEditor columnEditor : rowEditor.getColumnEditors() ) {
-                Column column = new Column( new Integer( columnEditor.getSpan() ) );
+                Column column = new Column( buildColumnSize( new Integer( columnEditor.getSpan() ) ) );
                 if ( columnHasNestedRows( columnEditor ) ) {
                     extractRows( columnEditor.getRows(), column );
                 } else {

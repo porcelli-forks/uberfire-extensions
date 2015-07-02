@@ -16,7 +16,6 @@
 
 package org.uberfire.ext.widgets.common.client.tables;
 
-import com.github.gwtbootstrap.client.ui.ListBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -26,12 +25,11 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
+import org.gwtbootstrap3.client.ui.ListBox;
 import org.uberfire.ext.services.shared.preferences.GridGlobalPreferences;
 import org.uberfire.ext.services.shared.preferences.GridPreferencesStore;
 import org.uberfire.ext.widgets.common.client.resources.UberfireSimplePagerResources;
 import org.uberfire.ext.widgets.common.client.resources.i18n.CommonConstants;
-import org.uberfire.mvp.Command;
-
 
 /**
  * Widget that shows rows of paged data.
@@ -58,28 +56,28 @@ public class PagedTable<T>
 
     public boolean showPageSizesSelector = false;
 
-    private boolean showFFButton= true;
+    private boolean showFFButton = true;
     private boolean showLButton = true;
 
-    public PagedTable(){
+    public PagedTable() {
         super();
     }
 
     public PagedTable( final int pageSize ) {
         super();
-        this.pageSize=pageSize;
+        this.pageSize = pageSize;
         this.dataGrid.setPageSize( pageSize );
         this.pager.setDisplay( dataGrid );
-        createPageSizesListBox(5,20,5);
+        createPageSizesListBox( 5, 20, 5 );
     }
 
     public PagedTable( final int pageSize,
                        final ProvidesKey<T> providesKey ) {
         super( providesKey );
-        this.pageSize =pageSize;
+        this.pageSize = pageSize;
         this.dataGrid.setPageSize( pageSize );
         this.pager.setDisplay( dataGrid );
-        createPageSizesListBox(5,20,5);
+        createPageSizesListBox( 5, 20, 5 );
     }
 
     public PagedTable( final int pageSize,
@@ -87,10 +85,10 @@ public class PagedTable<T>
                        final GridGlobalPreferences gridGlobalPreferences ) {
         super( providesKey, gridGlobalPreferences );
         pageSizesSelector.setVisible( false );
-        this.pageSize=pageSize;
+        this.pageSize = pageSize;
         this.dataGrid.setPageSize( pageSize );
         this.pager.setDisplay( dataGrid );
-        createPageSizesListBox(5,20,5);
+        createPageSizesListBox( 5, 20, 5 );
     }
 
     public PagedTable( final int pageSize,
@@ -100,10 +98,10 @@ public class PagedTable<T>
 
         super( providesKey, gridGlobalPreferences );
         this.showPageSizesSelector = showPageSizesSelector;
-        this.pageSize=pageSize;
+        this.pageSize = pageSize;
         this.dataGrid.setPageSize( pageSize );
         this.pager.setDisplay( dataGrid );
-        createPageSizesListBox(5,20,5);
+        createPageSizesListBox( 5, 20, 5 );
     }
 
     protected Widget makeWidget() {
@@ -127,7 +125,7 @@ public class PagedTable<T>
         return this.pager.getPageStart();
     }
 
-    public final void loadPageSizePreferences(  ) {
+    public final void loadPageSizePreferences() {
         pageSize = getPageSizeStored();
         this.dataGrid.setPageSize( pageSize );
         this.pager.setPageSize( pageSize );
@@ -135,35 +133,41 @@ public class PagedTable<T>
         pageSizesSelector.setVisible( this.showPageSizesSelector );
     }
 
-
-    public void createPageSizesListBox(int minPageSize, int maxPageSize,int incPageSize){
+    public void createPageSizesListBox( int minPageSize,
+                                        int maxPageSize,
+                                        int incPageSize ) {
         pageSizesSelector.clear();
-        for (int i=minPageSize;i<=maxPageSize;i=i+incPageSize) {
+        for ( int i = minPageSize; i <= maxPageSize; i = i + incPageSize ) {
             pageSizesSelector.addItem( String.valueOf( i ) + " " + CommonConstants.INSTANCE.Items(), String.valueOf( i ) );
-            if(i==pageSize){
-                pageSizesSelector.setSelectedValue( String.valueOf( i ) );
+            if ( i == pageSize ) {
+                for ( int z = 0; z < pageSizesSelector.getItemCount(); z++ ) {
+                    if ( pageSizesSelector.getValue( i ).equals( String.valueOf( i ) ) ) {
+                        pageSizesSelector.setSelectedIndex( z );
+                        return;
+                    }
+                }
             }
         }
 
         pageSizesSelector.addChangeHandler( new ChangeHandler() {
             @Override
             public void onChange( ChangeEvent event ) {
-                storePageSizeInGridPreferences( Integer.parseInt( pageSizesSelector.getValue() ) );
+                storePageSizeInGridPreferences( Integer.parseInt( pageSizesSelector.getSelectedItemText() ) );
                 loadPageSizePreferences();
             }
         } );
     }
 
-    private void storePageSizeInGridPreferences(int pageSize) {
-        GridPreferencesStore gridPreferencesStore =super.getGridPreferencesStore();
+    private void storePageSizeInGridPreferences( int pageSize ) {
+        GridPreferencesStore gridPreferencesStore = super.getGridPreferencesStore();
         if ( gridPreferencesStore != null ) {
             gridPreferencesStore.setPageSizePreferences( pageSize );
             super.saveGridPreferences();
         }
     }
 
-    private int getPageSizeStored(){
-        GridPreferencesStore gridPreferencesStore =super.getGridPreferencesStore();
+    private int getPageSizeStored() {
+        GridPreferencesStore gridPreferencesStore = super.getGridPreferencesStore();
         if ( gridPreferencesStore != null ) {
             return gridPreferencesStore.getPageSizePreferences();
         }
@@ -180,7 +184,6 @@ public class PagedTable<T>
         }
     }
 
-
     public void setShowLastPagerButton( boolean showLastPagerButton ) {
         this.showLButton = showLastPagerButton;
     }
@@ -190,7 +193,7 @@ public class PagedTable<T>
     }
 
     @UiFactory
-    public UberfireSimplePager makeUberfireSimplePager () {
+    public UberfireSimplePager makeUberfireSimplePager() {
         return new UberfireSimplePager(
                 UberfireSimplePager.TextLocation.CENTER,
                 UberfireSimplePagerResources.INSTANCE,

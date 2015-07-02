@@ -5,5 +5,5 @@
       margin-bottom:0px !important;
     }
   </ui:style>
-  <g:FlowPanel ui:field='items' addStyleNames="row-fluid control-group {style.margin}"/>
+  <g:FlowPanel ui:field='items' addStyleNames="row form-group {style.margin}"/>
 </ui:UiBinder>

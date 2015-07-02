@@ -4,13 +4,13 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import com.github.gwtbootstrap.client.ui.Label;
-import com.github.gwtbootstrap.client.ui.Modal;
-import com.github.gwtbootstrap.client.ui.TextBox;
-import com.github.gwtbootstrap.client.ui.constants.AlternateSize;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.InputSize;
 import org.uberfire.ext.layout.editor.client.LayoutEditorPluginAPI;
 import org.uberfire.ext.layout.editor.client.structure.EditorWidget;
 import org.uberfire.ext.layout.editor.client.util.LayoutDragComponent;
@@ -36,7 +36,7 @@ public class ScreenLayoutDragComponent extends LayoutDragComponent {
         TextBox textBox = GWT.create( TextBox.class );
         textBox.setPlaceholder( "Screen Component" );
         textBox.setReadOnly( true );
-        textBox.setAlternateSize( AlternateSize.MEDIUM );
+        textBox.setSize( InputSize.DEFAULT );
         return textBox;
     }
 

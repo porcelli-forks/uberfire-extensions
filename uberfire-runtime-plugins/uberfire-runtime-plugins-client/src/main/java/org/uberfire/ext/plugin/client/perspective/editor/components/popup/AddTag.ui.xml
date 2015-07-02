@@ -19,43 +19,28 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
-             xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
-    >
-
-
-  <ui:style>
-    .mandatory-field {
-      color: #FF0000 !important;
-    }
-  </ui:style>
-
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 
   <ui:with field="i18n" type="org.uberfire.ext.plugin.client.resources.i18n.CommonConstants"/>
 
-  <g:HTMLPanel>
-
-    <b:ControlGroup ui:field="tagControlGroup">
-      <b:ControlLabel for="tag">
+  <b:Form>
+    <b:FormGroup ui:field="tagControlGroup">
+      <b:FormLabel for="tag" addStyleNames="col-sm-3">
         <ui:text from="{i18n.TagName}"/>
-      </b:ControlLabel>
-      <b:Controls>
-        <b:TextBox ui:field="tag" placeholder="{i18n.TagNameHolder}"/>
-        <b:Button icon="PLUS" type="PRIMARY" ui:field="addTag">
-          <ui:text from="{i18n.AddTag}"/>
-        </b:Button>
-        <b:HelpInline ui:field="tagInline"/>
-      </b:Controls>
-    </b:ControlGroup>
+      </b:FormLabel>
+      <b:TextBox ui:field="tag" placeholder="{i18n.TagNameHolder}"/>
+      <b:Button icon="PLUS" type="PRIMARY" ui:field="addTag">
+        <ui:text from="{i18n.AddTag}"/>
+      </b:Button>
+      <b:HelpBlock ui:field="tagInline"/>
+    </b:FormGroup>
 
-    <b:ControlGroup>
-      <b:ControlLabel>
+    <b:FormGroup>
+      <b:FormLabel>
         <ui:text from="{i18n.TagLabel}"/>
-      </b:ControlLabel>
-      <b:Controls>
-        <g:HorizontalPanel ui:field="tags"/>
-      </b:Controls>
-    </b:ControlGroup>
-
-  </g:HTMLPanel>
+      </b:FormLabel>
+      <g:HorizontalPanel ui:field="tags"/>
+    </b:FormGroup>
+  </b:Form>
 
 </ui:UiBinder>

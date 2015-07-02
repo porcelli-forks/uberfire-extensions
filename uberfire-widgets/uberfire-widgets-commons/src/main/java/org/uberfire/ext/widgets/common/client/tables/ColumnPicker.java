@@ -16,11 +16,6 @@
 
 package org.uberfire.ext.widgets.common.client.tables;
 
-import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.CheckBox;
-import com.github.gwtbootstrap.client.ui.DataGrid;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
-import com.github.gwtbootstrap.client.ui.resources.ButtonSize;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -37,6 +32,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.CheckBox;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
+import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.constants.Toggle;
+import org.gwtbootstrap3.client.ui.gwt.DataGrid;
 import org.uberfire.ext.services.shared.preferences.GridColumnPreference;
 import org.uberfire.ext.services.shared.preferences.GridPreferencesStore;
 import org.uberfire.ext.widgets.common.client.resources.i18n.CommonConstants;
@@ -130,8 +131,8 @@ public class ColumnPicker<T> {
 
     public Button createToggleButton() {
         final Button button = new Button();
-        button.setToggle(true);
-        button.setIcon(IconType.LIST_UL);
+        button.setDataToggle( Toggle.BUTTON );
+        button.setIcon( IconType.LIST_UL);
         button.setTitle( CommonConstants.INSTANCE.ColumnPickerButtonTooltip() );
 
         popup.getElement().getStyle().setZIndex(Integer.MAX_VALUE);
@@ -188,7 +189,7 @@ public class ColumnPicker<T> {
 
         if (gridPreferences != null) {
             Button resetButton = new Button("Reset");
-            resetButton.setSize(ButtonSize.MINI);
+            resetButton.setSize( ButtonSize.EXTRA_SMALL);
             resetButton.addClickHandler(new ClickHandler() {
 
                 @Override
