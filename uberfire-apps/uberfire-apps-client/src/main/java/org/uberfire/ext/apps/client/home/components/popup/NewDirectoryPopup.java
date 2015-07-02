@@ -15,15 +15,16 @@
 */
 package org.uberfire.ext.apps.client.home.components.popup;
 
-import com.github.gwtbootstrap.client.ui.ControlGroup;
-import com.github.gwtbootstrap.client.ui.HelpInline;
-import com.github.gwtbootstrap.client.ui.TextBox;
-import com.github.gwtbootstrap.client.ui.constants.ControlGroupType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.FormGroup;
+import org.gwtbootstrap3.client.ui.HelpBlock;
+import org.gwtbootstrap3.client.ui.ModalBody;
+import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.ValidationState;
 import org.uberfire.ext.apps.api.Directory;
 import org.uberfire.ext.apps.client.resources.i18n.CommonConstants;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
@@ -42,13 +43,13 @@ public class NewDirectoryPopup
     }
 
     @UiField
-    ControlGroup directoryNameControlGroup;
+    FormGroup directoryNameControlGroup;
 
     @UiField
     TextBox directoryName;
 
     @UiField
-    HelpInline directoryNameInline;
+    HelpBlock directoryNameInline;
 
     private DirectoryNameValidator directoryNameValidator;
 
@@ -56,7 +57,9 @@ public class NewDirectoryPopup
 
     public NewDirectoryPopup( Directory currentDirectory ) {
         setTitle( CommonConstants.INSTANCE.CreateDir() );
-        add( uiBinder.createAndBindUi( this ) );
+        add( new ModalBody() {{
+            add( uiBinder.createAndBindUi( NewDirectoryPopup.this ) );
+        }} );
 
         add( new ModalFooterOKCancelButtons(
                      new Command() {
@@ -89,7 +92,7 @@ public class NewDirectoryPopup
             this.clickCommand.execute( directoryName.getText() );
             closePopup();
         } else {
-            directoryNameControlGroup.setType( ControlGroupType.ERROR );
+            directoryNameControlGroup.setValidationState( ValidationState.ERROR );
             directoryNameInline.setText( directoryNameValidator.getValidationError() );
         }
     }

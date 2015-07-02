@@ -1,9 +1,5 @@
 package org.uberfire.client.docks;
 
-import com.github.gwtbootstrap.client.ui.Icon;
-import com.github.gwtbootstrap.client.ui.Label;
-import com.github.gwtbootstrap.client.ui.constants.IconSize;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,6 +11,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Icon;
+import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.uberfire.client.resources.WebAppResource;
 import org.uberfire.mvp.ParameterizedCommand;
 
@@ -74,9 +73,8 @@ public class DocksItem
 
     private void createDragStart( DragStartEvent event ) {
         event.setData( DocksItem.class.getSimpleName(), itemLabel.getText() );
-        Icon icon = new Icon( IconType.MOVE );
-        icon.setIconSize(IconSize.DEFAULT);
-        event.getDataTransfer().setDragImage(icon.getElement(), 10, 10);
+        Icon icon = new Icon( IconType.ARROWS );
+        event.getDataTransfer().setDragImage( icon.getElement(), 10, 10 );
     }
 
     public void selected() {

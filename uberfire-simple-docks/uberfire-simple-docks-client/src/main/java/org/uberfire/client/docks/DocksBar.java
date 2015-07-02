@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
-import com.github.gwtbootstrap.client.ui.resources.ButtonSize;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -22,6 +19,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.uberfire.client.resources.WebAppResource;
 import org.uberfire.client.workbench.docks.UberfireDock;
 import org.uberfire.client.workbench.docks.UberfireDockPosition;
@@ -37,6 +37,7 @@ public class DocksBar
     interface ViewBinder
             extends
             UiBinder<Widget, DocksBar> {
+
     }
 
     private ViewBinder uiBinder = GWT.create( ViewBinder.class );
@@ -76,9 +77,8 @@ public class DocksBar
 
     void dropHandler( DropEvent event ) {
         event.preventDefault();
-        dropHandler.execute(event.getData(DocksItem.class.getSimpleName() ) );
+        dropHandler.execute( event.getData( DocksItem.class.getSimpleName() ) );
     }
-
 
     public void updateAvaliableDocksMenu( final Set<UberfireDock> avaliableDocks,
                                           final ParameterizedCommand<String> openAvaliableDocks ) {
@@ -92,7 +92,7 @@ public class DocksBar
         allDocksMenu = new AllDocksMenu();
         Button allDocksButton = GWT.create( Button.class );
         allDocksButton.setIcon( IconType.COGS );
-        allDocksButton.setSize( ButtonSize.MINI );
+        allDocksButton.setSize( ButtonSize.EXTRA_SMALL );
         allDocksButton.addClickHandler( new ClickHandler() {
             @Override
             public void onClick( ClickEvent event ) {
@@ -108,10 +108,10 @@ public class DocksBar
 
     public void clearDocks() {
         docksBarPanel.clear();
-        docksItems = new ArrayList<DocksItem>(  );
+        docksItems = new ArrayList<DocksItem>();
     }
 
-    public void setDockSelected(final String identifier ) {
+    public void setDockSelected( final String identifier ) {
         for ( DocksItem docksItem : docksItems ) {
             if ( docksItem.getIdentifier().equalsIgnoreCase( identifier ) ) {
                 docksItem.selected();
@@ -135,7 +135,7 @@ public class DocksBar
         docksBarPanel.add( dockItem );
     }
 
-    public void removeDock(final UberfireDock dock ) {
+    public void removeDock( final UberfireDock dock ) {
 
         DocksItem toRemove = null;
         for ( DocksItem docksItem : docksItems ) {
@@ -153,7 +153,7 @@ public class DocksBar
         return 30;
     }
 
-    private void setCSS(final UberfireDockPosition position ) {
+    private void setCSS( final UberfireDockPosition position ) {
 
         String style;
         if ( position == UberfireDockPosition.SOUTH ) {
@@ -167,15 +167,15 @@ public class DocksBar
         docksBarPanel.addStyleName( style );
     }
 
-    private HandlerRegistration addDropHandler(final DropHandler handler ) {
+    private HandlerRegistration addDropHandler( final DropHandler handler ) {
         return addBitlessDomHandler( handler, DropEvent.getType() );
     }
 
-    private HandlerRegistration addDragOverHandler(final DragOverHandler handler ) {
+    private HandlerRegistration addDragOverHandler( final DragOverHandler handler ) {
         return addBitlessDomHandler( handler, DragOverEvent.getType() );
     }
 
-    private HandlerRegistration addDragLeaveHandler(final DragLeaveHandler handler ) {
+    private HandlerRegistration addDragLeaveHandler( final DragLeaveHandler handler ) {
         return addBitlessDomHandler( handler, DragLeaveEvent.getType() );
     }
 

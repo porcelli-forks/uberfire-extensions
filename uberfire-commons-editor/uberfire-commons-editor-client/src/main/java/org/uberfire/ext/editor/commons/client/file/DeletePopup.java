@@ -16,10 +16,10 @@
 
 package org.uberfire.ext.editor.commons.client.file;
 
-import com.github.gwtbootstrap.client.ui.TextBox;
-import com.github.gwtbootstrap.client.ui.constants.ButtonType;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
 import com.google.gwt.user.client.Window;
+import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.uberfire.ext.editor.commons.client.resources.CommonImages;
 import org.uberfire.ext.editor.commons.client.resources.i18n.CommonConstants;
 import org.uberfire.ext.widgets.common.client.common.popups.FormStylePopup;
@@ -34,8 +34,7 @@ public class DeletePopup extends FormStylePopup {
     final private TextBox checkInCommentTextBox = new TextBox();
 
     public DeletePopup( final ParameterizedCommand<String> command ) {
-        super( CommonImages.INSTANCE.edit(),
-               CommonConstants.INSTANCE.DeletePopupTitle() );
+        super(  CommonConstants.INSTANCE.DeletePopupTitle() );
 
         checkNotNull( "command",
                       command );
@@ -61,7 +60,7 @@ public class DeletePopup extends FormStylePopup {
                                   command.execute( checkInCommentTextBox.getText() );
                               }
                           },
-                          IconType.REMOVE,
+                          IconType.TIMES,
                           ButtonType.PRIMARY );
         footer.addButton( CommonConstants.INSTANCE.Cancel(),
                           new Command() {
@@ -95,7 +94,7 @@ public class DeletePopup extends FormStylePopup {
                                   command.execute();
                               }
                           },
-                          IconType.REMOVE,
+                          IconType.TIMES,
                           ButtonType.PRIMARY );
         footer.addButton( CommonConstants.INSTANCE.Cancel(),
                           new Command() {

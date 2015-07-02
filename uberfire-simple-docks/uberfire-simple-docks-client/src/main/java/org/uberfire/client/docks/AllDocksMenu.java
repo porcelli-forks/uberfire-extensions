@@ -3,8 +3,6 @@ package org.uberfire.client.docks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.gwtbootstrap.client.ui.NavLink;
-import com.github.gwtbootstrap.client.ui.NavList;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,10 +10,11 @@ import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.AnchorListItem;
+import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.uberfire.mvp.ParameterizedCommand;
 
 public class AllDocksMenu extends PopupPanel {
@@ -32,7 +31,7 @@ public class AllDocksMenu extends PopupPanel {
     FlowPanel popup;
 
     @UiField
-    NavList navList;
+    DropDownMenu navList;
 
     private List<DocksMenu> currentDocks;
 
@@ -61,14 +60,14 @@ public class AllDocksMenu extends PopupPanel {
     }
 
     public void createDocksMenu( final String label,
-                            final ParameterizedCommand<String> openDockLink ) {
+                                 final ParameterizedCommand<String> openDockLink ) {
 
         DocksMenu docksMenu = new DocksMenu( label, openDockLink );
 
-        if(!alreadyHasThisDock( docksMenu ) ){
+        if ( !alreadyHasThisDock( docksMenu ) ) {
             currentDocks.add( docksMenu );
 
-            final NavLink navLink = GWT.create( NavLink.class );
+            final AnchorListItem navLink = GWT.create( AnchorListItem.class );
             navLink.setText( label );
             navLink.addClickHandler( new ClickHandler() {
                 @Override
@@ -87,7 +86,7 @@ public class AllDocksMenu extends PopupPanel {
 
     public void clearDocksMenu() {
         navList.clear();
-        currentDocks = new ArrayList<DocksMenu>(  );
+        currentDocks = new ArrayList<DocksMenu>();
     }
 
     private class DocksMenu {

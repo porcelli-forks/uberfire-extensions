@@ -1,9 +1,5 @@
 package org.uberfire.client.docks;
 
-import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.Label;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
-import com.github.gwtbootstrap.client.ui.resources.ButtonSize;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,6 +8,10 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.uberfire.client.resources.WebAppResource;
 import org.uberfire.client.workbench.docks.UberfireDockPosition;
 import org.uberfire.mvp.ParameterizedCommand;
@@ -55,7 +55,7 @@ public class DocksExpandedBar
                                final ParameterizedCommand<String> deselectCommand ) {
         Button collapse = new Button();
         collapse.setIcon( IconType.SORT_DOWN );
-        collapse.setSize( ButtonSize.MINI );
+        collapse.setSize( ButtonSize.EXTRA_SMALL );
         collapse.addClickHandler( new ClickHandler() {
             @Override
             public void onClick( ClickEvent event ) {
