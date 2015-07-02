@@ -1,13 +1,11 @@
 package org.uberfire.ext.layout.editor.client.dnd;
 
-import com.github.gwtbootstrap.client.ui.Modal;
-import com.github.gwtbootstrap.client.ui.config.ColumnSizeConfigurator;
-import com.github.gwtbootstrap.client.ui.config.DefaultColumnSizeConfigurator;
 import com.google.gwt.event.dom.client.DropEvent;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwtmockito.GwtMockito;
 import com.google.gwtmockito.GwtMockitoTestRunner;
 import com.google.gwtmockito.fakes.FakeProvider;
+import org.gwtbootstrap3.client.ui.Modal;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,15 +29,6 @@ public class DropColumnPanelTest {
 
     @Before
     public void setup() {
-        //Bootstrap Column need this hack (it doesn' allow GWT.CREATE (no default constructor)
-        // and need's to register correct column size provider configurator (instead of GWT Mockito MOCK)
-        GwtMockito.useProviderForType( ColumnSizeConfigurator.class, new FakeProvider() {
-            @Override
-            public Object getFake( Class aClass ) {
-                return new DefaultColumnSizeConfigurator();
-            }
-        } );
-
         layoutDragComponent = mock( LayoutDragComponent.class );
         componentConfigureModal = mock( Modal.class );
 

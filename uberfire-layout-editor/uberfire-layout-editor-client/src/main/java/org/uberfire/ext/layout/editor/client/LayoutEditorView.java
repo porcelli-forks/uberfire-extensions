@@ -17,17 +17,20 @@
 package org.uberfire.ext.layout.editor.client;
 
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
-import com.github.gwtbootstrap.client.ui.AccordionGroup;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Anchor;
+import org.gwtbootstrap3.client.ui.PanelBody;
+import org.gwtbootstrap3.client.ui.PanelCollapse;
+import org.gwtbootstrap3.client.ui.PanelGroup;
 import org.uberfire.client.mvp.UberView;
 import org.uberfire.ext.layout.editor.api.editor.LayoutEditor;
 import org.uberfire.ext.layout.editor.api.editor.RowEditor;
@@ -56,18 +59,41 @@ public class LayoutEditorView extends Composite
     LayoutEditorUI layoutEditorUI;
 
     @UiField
-    AccordionGroup gridSystem;
+    PanelBody gridSystem;
 
     @UiField
-    AccordionGroup components;
+    PanelBody components;
 
     @UiField
     FlowPanel container;
+
+    //needed to setup ids
+    @UiField
+    PanelGroup accordion;
+
+    @UiField
+    Anchor anchor1;
+
+    @UiField
+    PanelCollapse collapseOne;
+
+    @UiField
+    Anchor anchor2;
+
+    @UiField
+    PanelCollapse collapseTwo;
 
     @Inject
     public LayoutEditorView( LayoutEditorUI layoutEditorUI ) {
         initWidget( uiBinder.createAndBindUi( this ) );
         this.layoutEditorUI = layoutEditorUI;
+
+        accordion.setId( DOM.createUniqueId() );
+        anchor1.setDataParent( accordion.getId() );
+        anchor1.setDataTargetWidget( collapseOne );
+
+        anchor2.setDataParent( accordion.getId() );
+        anchor2.setDataTargetWidget( collapseTwo );
     }
 
     @Override
@@ -77,6 +103,7 @@ public class LayoutEditorView extends Composite
 
     @Override
     public void setupGridSystem( LayoutDragComponent... layoutDragComponents ) {
+        gridSystem.clear();
         for ( LayoutDragComponent layoutDragComponent : layoutDragComponents ) {
             gridSystem.add( new DragGridElement( layoutDragComponent ) );
         }
@@ -84,6 +111,7 @@ public class LayoutEditorView extends Composite
 
     @Override
     public void setupComponents( LayoutDragComponent... layoutDragComponents ) {
+        components.clear();
         for ( LayoutDragComponent layoutDragComponent : layoutDragComponents ) {
             components.add( new DragGridElement( layoutDragComponent ) );
         }

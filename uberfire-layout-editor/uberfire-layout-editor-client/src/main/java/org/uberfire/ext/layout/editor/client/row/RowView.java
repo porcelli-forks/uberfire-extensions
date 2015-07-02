@@ -2,14 +2,6 @@ package org.uberfire.ext.layout.editor.client.row;
 
 import java.util.List;
 
-import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.Column;
-import com.github.gwtbootstrap.client.ui.FluidContainer;
-import com.github.gwtbootstrap.client.ui.FluidRow;
-import com.github.gwtbootstrap.client.ui.Label;
-import com.github.gwtbootstrap.client.ui.constants.ButtonType;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
-import com.github.gwtbootstrap.client.ui.resources.ButtonSize;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -17,6 +9,15 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Column;
+import org.gwtbootstrap3.client.ui.Container;
+import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.Row;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
+import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.gwtbootstrap3.client.ui.constants.ColumnSize;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.uberfire.ext.layout.editor.api.editor.ColumnEditor;
 import org.uberfire.ext.layout.editor.api.editor.LayoutComponent;
 import org.uberfire.ext.layout.editor.api.editor.RowEditor;
@@ -35,7 +36,7 @@ public class RowView extends Composite {
     private RowEditorWidgetUI row;
 
     @UiField
-    FluidContainer fluidContainer;
+    Container fluidContainer;
 
     private EditorWidget editorWidget;
 
@@ -85,8 +86,8 @@ public class RowView extends Composite {
         reload( rowEditor.getColumnEditors() );
     }
 
-    private FluidRow generateColumns( List<ColumnEditor> columnEditors ) {
-        FluidRow rowWidget = new FluidRow();
+    private Row generateColumns( List<ColumnEditor> columnEditors ) {
+        Row rowWidget = new Row();
         rowWidget.getElement().getStyle().setProperty( "marginBottom", "15px" );
 
         for ( ColumnEditor columnEditor : columnEditors ) {
@@ -112,14 +113,14 @@ public class RowView extends Composite {
     }
 
     protected RowView createRowView( ColumnEditorUI parent,
-                                   DropColumnPanel dropColumnPanel,
-                                   RowEditor editor ) {
+                                     DropColumnPanel dropColumnPanel,
+                                     RowEditor editor ) {
         return new RowView( parent, editor.getRowSpam(), dropColumnPanel, editor );
     }
 
     protected LayoutComponentView createLayoutComponentView( ColumnEditorUI parent,
-                                                   LayoutComponent layoutComponent,
-                                                   LayoutDragComponent layoutDragComponent ) {
+                                                             LayoutComponent layoutComponent,
+                                                             LayoutDragComponent layoutDragComponent ) {
         return new LayoutComponentView( parent, layoutComponent, layoutDragComponent );
     }
 
@@ -132,8 +133,8 @@ public class RowView extends Composite {
         row.getWidget().add( generateColumns( columnEditors ) );
     }
 
-    private FluidRow generateColumns() {
-        FluidRow rowWidget = new FluidRow();
+    private Row generateColumns() {
+        Row rowWidget = new Row();
         rowWidget.getElement().getStyle().setProperty( "marginBottom", "15px" );
         for ( String span : row.getRowSpans() ) {
             Column column = createColumn( span );
@@ -148,7 +149,7 @@ public class RowView extends Composite {
     }
 
     private Column createColumn( ColumnEditor columnEditor ) {
-        Column column = new Column( Integer.valueOf( columnEditor.getSpan() ) );
+        Column column = new Column( buildColumnSize( Integer.valueOf( columnEditor.getSpan() ) ) );
         column.add( generateLabel( "Column" ) );
         setCSS( column );
         return column;
@@ -165,7 +166,7 @@ public class RowView extends Composite {
     }
 
     private Column createColumn( String span ) {
-        Column column = new Column( Integer.valueOf( span ) );
+        Column column = new Column( buildColumnSize( Integer.valueOf( span ) ) );
         column.add( generateLabel( "Column" ) );
         ColumnEditorUI columnEditor = new ColumnEditorUI( row, column, span );
         column.add( new DropColumnPanel( columnEditor ) );
@@ -178,22 +179,22 @@ public class RowView extends Composite {
         column.getElement().getStyle().setProperty( "backgroundColor", "White" );
     }
 
-    private FluidRow generateHeaderRow() {
-        FluidRow row = new FluidRow();
+    private Row generateHeaderRow() {
+        Row row = new Row();
         row.add( generateRowLabelColumn() );
         row.add( generateButtonColumn() );
         return row;
     }
 
     private Column generateRowLabelColumn() {
-        Column column = new Column( 6 );
+        Column column = new Column( buildColumnSize( 6 ) );
         Label row1 = generateLabel( "Row" );
         column.add( row1 );
         return column;
     }
 
     private Column generateButtonColumn() {
-        Column buttonColumn = new Column( 6 );
+        Column buttonColumn = new Column( buildColumnSize( 6 ) );
         buttonColumn.getElement().getStyle().setProperty( "textAlign", "right" );
         Button remove = generateButton();
         buttonColumn.add( remove );
@@ -203,7 +204,7 @@ public class RowView extends Composite {
     private Button generateButton() {
         Button remove = GWT.create( Button.class );
         remove.setText( "Remove" );
-        remove.setSize( ButtonSize.MINI );
+        remove.setSize( ButtonSize.EXTRA_SMALL );
         remove.setType( ButtonType.DANGER );
         remove.setIcon( IconType.REMOVE );
         remove.getElement().getStyle().setProperty( "marginRight", "3px" );
@@ -233,6 +234,37 @@ public class RowView extends Composite {
         label.setText( row );
         label.getElement().getStyle().setProperty( "marginLeft", "3px" );
         return label;
+    }
+
+    public static ColumnSize buildColumnSize( final int value ) {
+        switch ( value ) {
+            case 1:
+                return ColumnSize.MD_1;
+            case 2:
+                return ColumnSize.MD_2;
+            case 3:
+                return ColumnSize.MD_3;
+            case 4:
+                return ColumnSize.MD_4;
+            case 5:
+                return ColumnSize.MD_5;
+            case 6:
+                return ColumnSize.MD_6;
+            case 7:
+                return ColumnSize.MD_7;
+            case 8:
+                return ColumnSize.MD_8;
+            case 9:
+                return ColumnSize.MD_9;
+            case 10:
+                return ColumnSize.MD_10;
+            case 11:
+                return ColumnSize.MD_11;
+            case 12:
+                return ColumnSize.MD_12;
+            default:
+                return ColumnSize.MD_12;
+        }
     }
 
 }
