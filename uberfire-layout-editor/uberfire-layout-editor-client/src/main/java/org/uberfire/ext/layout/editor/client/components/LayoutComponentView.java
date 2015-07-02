@@ -1,13 +1,5 @@
 package org.uberfire.ext.layout.editor.client.components;
 
-import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.Column;
-import com.github.gwtbootstrap.client.ui.FluidContainer;
-import com.github.gwtbootstrap.client.ui.FluidRow;
-import com.github.gwtbootstrap.client.ui.Modal;
-import com.github.gwtbootstrap.client.ui.constants.ButtonType;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
-import com.github.gwtbootstrap.client.ui.resources.ButtonSize;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -15,6 +7,15 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Column;
+import org.gwtbootstrap3.client.ui.Container;
+import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.Row;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
+import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.gwtbootstrap3.client.ui.constants.ColumnSize;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.jboss.errai.ioc.client.container.IOC;
 import org.jboss.errai.ioc.client.container.IOCBeanDef;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
@@ -32,7 +33,7 @@ public class LayoutComponentView extends Composite {
     private LayoutComponentWidgetUI layoutComponentWidgetUI;
 
     @UiField
-    FluidContainer fluidContainer;
+    Container fluidContainer;
 
     private EditorWidget parent;
 
@@ -44,9 +45,9 @@ public class LayoutComponentView extends Composite {
 
     private static ScreenEditorMainViewBinder uiBinder = GWT.create( ScreenEditorMainViewBinder.class );
 
-    public LayoutComponentView( ColumnEditorUI parent,
-                                LayoutDragComponent type,
-                                boolean newComponent ) {
+    public LayoutComponentView( final ColumnEditorUI parent,
+                                final LayoutDragComponent type,
+                                final boolean newComponent ) {
         initWidget( uiBinder.createAndBindUi( this ) );
         this.type = type;
         this.parent = parent;
@@ -57,9 +58,9 @@ public class LayoutComponentView extends Composite {
         }
     }
 
-    public LayoutComponentView( ColumnEditorUI parent,
-                                LayoutComponent editor,
-                                LayoutDragComponent type ) {
+    public LayoutComponentView( final ColumnEditorUI parent,
+                                final LayoutComponent editor,
+                                final LayoutDragComponent type ) {
         initWidget( uiBinder.createAndBindUi( this ) );
         this.parent = parent;
         this.type = type;
@@ -68,7 +69,7 @@ public class LayoutComponentView extends Composite {
         build();
     }
 
-    private void loadLayoutComponentsProperties( LayoutComponent editor ) {
+    private void loadLayoutComponentsProperties( final LayoutComponent editor ) {
         LayoutEditorUI layoutEditor = getLayoutEditor();
         layoutEditor.loadComponentProperties( this.layoutComponentWidgetUI, editor );
     }
@@ -78,22 +79,22 @@ public class LayoutComponentView extends Composite {
         layoutComponentWidgetUI.getWidget().add( generateMainRow() );
     }
 
-    private FluidRow generateMainRow() {
-        FluidRow row = new FluidRow();
+    private Row generateMainRow() {
+        Row row = new Row();
         row.add( generateLayoutComponentPreview() );
         row.add( generateButtonColumn() );
         return row;
     }
 
     private Column generateLayoutComponentPreview() {
-        Column buttonColumn = new Column( 8 );
+        Column buttonColumn = new Column( ColumnSize.LG_8 );
         buttonColumn.getElement().getStyle().setProperty( "textAlign", "left" );
         buttonColumn.add( type.getComponentPreview() );
         return buttonColumn;
     }
 
     private Column generateButtonColumn() {
-        Column buttonColumn = new Column( 4 );
+        Column buttonColumn = new Column( ColumnSize.LG_4 );
         buttonColumn.getElement().getStyle().setProperty( "textAlign", "right" );
         if ( type.hasConfigureModal() ) {
             buttonColumn.add( generateConfigureButton() );
@@ -104,7 +105,7 @@ public class LayoutComponentView extends Composite {
 
     private Button generateConfigureButton() {
         Button remove = GWT.create( Button.class );
-        remove.setSize( ButtonSize.MINI );
+        remove.setSize( ButtonSize.EXTRA_SMALL );
         remove.setType( ButtonType.PRIMARY );
         remove.setIcon( IconType.EDIT );
         remove.getElement().getStyle().setProperty( "marginRight", "3px" );
@@ -123,7 +124,7 @@ public class LayoutComponentView extends Composite {
 
     private Button generateRemoveButton() {
         Button remove = GWT.create( Button.class );
-        remove.setSize( ButtonSize.MINI );
+        remove.setSize( ButtonSize.EXTRA_SMALL );
         remove.setType( ButtonType.DANGER );
         remove.setIcon( IconType.REMOVE );
         remove.getElement().getStyle().setProperty( "marginRight", "3px" );

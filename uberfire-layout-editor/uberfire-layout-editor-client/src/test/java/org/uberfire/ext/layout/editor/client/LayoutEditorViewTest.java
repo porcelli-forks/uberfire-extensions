@@ -2,12 +2,8 @@ package org.uberfire.ext.layout.editor.client;
 
 import java.util.Map;
 
-import com.github.gwtbootstrap.client.ui.config.ColumnSizeConfigurator;
-import com.github.gwtbootstrap.client.ui.config.DefaultColumnSizeConfigurator;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwtmockito.GwtMockito;
 import com.google.gwtmockito.GwtMockitoTestRunner;
-import com.google.gwtmockito.fakes.FakeProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,15 +30,6 @@ public class LayoutEditorViewTest {
 
     @Before
     public void setup() {
-        //Bootstrap Column need this hack (it doesn' allow GWT.CREATE (no default constructor)
-        // and need's to register correct column size provider configurator (instead of GWT Mockito MOCK)
-        GwtMockito.useProviderForType( ColumnSizeConfigurator.class, new FakeProvider() {
-            @Override
-            public Object getFake( Class aClass ) {
-                return new DefaultColumnSizeConfigurator();
-            }
-        } );
-
         layoutEditorUI = new LayoutEditorUI();
         view = new LayoutEditorView( layoutEditorUI );
         LayoutEditorPresenter presenter = new LayoutEditorPresenter( view );

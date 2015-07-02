@@ -1,24 +1,24 @@
 package org.uberfire.ext.layout.editor.client.structure;
 
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import org.uberfire.ext.layout.editor.client.util.LayoutDragComponent;
 
 public class LayoutComponentWidgetUI implements EditorWidget {
 
     private final EditorWidget parent;
-    private final FlowPanel container;
+    private final ComplexPanel container;
     private final LayoutDragComponent type;
 
-    public LayoutComponentWidgetUI( EditorWidget parent,
-                                    FlowPanel container,
-                                    LayoutDragComponent type ) {
+    public LayoutComponentWidgetUI( final EditorWidget parent,
+                                    final ComplexPanel container,
+                                    final LayoutDragComponent type ) {
         this.parent = parent;
         this.container = container;
         this.type = type;
         parent.addChild( this );
     }
 
-    public FlowPanel getWidget() {
+    public ComplexPanel getWidget() {
         return container;
     }
 
@@ -27,11 +27,11 @@ public class LayoutComponentWidgetUI implements EditorWidget {
     }
 
     @Override
-    public void addChild( EditorWidget editorWidget ) {
+    public void addChild( final EditorWidget editorWidget ) {
     }
 
     @Override
-    public void removeChild( EditorWidget editorWidget ) {
+    public void removeChild( final EditorWidget editorWidget ) {
 
     }
 

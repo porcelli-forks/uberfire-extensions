@@ -20,20 +20,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.github.gwtbootstrap.client.ui.AccordionGroup;
-import com.github.gwtbootstrap.client.ui.ControlGroup;
-import com.github.gwtbootstrap.client.ui.HelpInline;
-import com.github.gwtbootstrap.client.ui.TextBox;
-import com.github.gwtbootstrap.client.ui.constants.ControlGroupType;
-import com.github.gwtbootstrap.client.ui.event.HiddenEvent;
-import com.github.gwtbootstrap.client.ui.event.HiddenHandler;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.shared.event.HiddenEvent;
+import org.gwtbootstrap3.client.shared.event.HiddenHandler;
+import org.gwtbootstrap3.client.shared.event.ModalHiddenEvent;
+import org.gwtbootstrap3.client.shared.event.ModalHiddenHandler;
+import org.gwtbootstrap3.client.ui.FormGroup;
+import org.gwtbootstrap3.client.ui.HelpBlock;
+import org.gwtbootstrap3.client.ui.ModalBody;
+import org.gwtbootstrap3.client.ui.PanelCollapse;
+import org.gwtbootstrap3.client.ui.PanelGroup;
+import org.gwtbootstrap3.client.ui.PanelHeader;
+import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.ValidationState;
 import org.uberfire.ext.layout.editor.client.LayoutEditorPluginAPI;
 import org.uberfire.ext.layout.editor.client.structure.EditorWidget;
 import org.uberfire.ext.plugin.client.perspective.editor.layout.editor.ScreenLayoutDragComponent;
@@ -61,19 +67,25 @@ public class EditScreen
     TextBox key;
 
     @UiField
-    AccordionGroup paramAccordion;
+    PanelCollapse paramAccordion;
 
     @UiField
-    ControlGroup paramKeyControlGroup;
+    FormGroup paramKeyControlGroup;
 
     @UiField
-    HelpInline paramKeyInline;
+    HelpBlock paramKeyInline;
 
     @UiField
     TextBox value;
 
     @UiField
     PropertyEditorWidget propertyEditor;
+
+    @UiField
+    PanelGroup accordion;
+
+    @UiField
+    PanelHeader header;
 
     private Boolean revertChanges = Boolean.TRUE;
 
@@ -82,7 +94,6 @@ public class EditScreen
     interface Binder
             extends
             UiBinder<Widget, EditScreen> {
-
     }
 
     private static Binder uiBinder = GWT.create( Binder.class );
@@ -92,8 +103,15 @@ public class EditScreen
         clearModal();
         this.layoutEditorPluginAPI = layoutEditorPluginAPI;
         setTitle( CommonConstants.INSTANCE.EditComponent() );
-        setMaxHeigth( "350px" );
-        add( uiBinder.createAndBindUi( this ) );
+        //setMaxHeigth( "350px" );
+        add( new ModalBody() {{
+            add( uiBinder.createAndBindUi( EditScreen.this ) );
+        }} );
+
+        accordion.setId( DOM.createUniqueId() );
+        header.setDataParent( accordion.getId() );
+        header.setDataTargetWidget( paramAccordion );
+
         this.parent = parent;
         propertyEditor.setLastOpenAccordionGroupTitle( "Screen Editors" );
         propertyEditor.handle( generateEvent( defaultScreenProperties() ) );
@@ -135,9 +153,9 @@ public class EditScreen
     }
 
     private void addHiddlenHandler() {
-        addHiddenHandler( new HiddenHandler() {
+        addHiddenHandler( new ModalHiddenHandler() {
             @Override
-            public void onHidden( HiddenEvent hiddenEvent ) {
+            public void onHidden( ModalHiddenEvent hiddenEvent ) {
                 if ( userPressCloseOrCancel() ) {
                     revertChanges();
                 }
@@ -188,12 +206,12 @@ public class EditScreen
 
     private PropertyEditorCategory addProperty() {
         paramKeyInline.setText( "" );
-        paramKeyControlGroup.setType( ControlGroupType.NONE );
+        paramKeyControlGroup.setValidationState( ValidationState.NONE );
 
         //Check the Key is valid
         final NameValidator validator = NameValidator.parameterNameValidator();
         if ( !validator.isValid( key.getText() ) ) {
-            paramKeyControlGroup.setType( ControlGroupType.ERROR );
+            paramKeyControlGroup.setValidationState( ValidationState.ERROR );
             paramKeyInline.setText( validator.getValidationError() );
             return null;
         }
@@ -202,11 +220,12 @@ public class EditScreen
         Map<String, String> properties = layoutEditorPluginAPI.getLayoutComponentProperties( parent );
         for ( String parameterKey : properties.keySet() ) {
             if ( key.getText().equals( parameterKey ) ) {
-                paramKeyControlGroup.setType( ControlGroupType.ERROR );
+                paramKeyControlGroup.setValidationState( ValidationState.ERROR );
                 paramKeyInline.setText( CommonConstants.INSTANCE.DuplicateParameterName() );
                 return null;
             }
         }
+
 
         layoutEditorPluginAPI.addLayoutComponentProperty( parent, key.getText(), value.getText() );
         return defaultScreenProperties();

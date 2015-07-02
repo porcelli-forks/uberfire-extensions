@@ -17,12 +17,11 @@
 package org.uberfire.ext.widgets.common.client.common.popups;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.ModalBody;
 import org.uberfire.ext.widgets.common.client.common.FormStyleLayout;
 
 /**
@@ -39,51 +38,35 @@ public class FormStylePopup extends BaseModal {
 
     private static FormStylePopupWidgetBinder uiBinder = GWT.create( FormStylePopupWidgetBinder.class );
 
-    @UiField(provided = true)
-    protected FormStyleLayout form;
+    @UiField
+    FormStyleLayout form;
 
     public FormStylePopup( final String title ) {
+        add( new ModalBody() {{
+            add( uiBinder.createAndBindUi( FormStylePopup.this ) );
+        }} );
         setTitle( title );
-        form = new FormStyleLayout();
-        add( uiBinder.createAndBindUi( this ) );
-    }
-
-    public FormStylePopup( final Image image,
-                           final String title ) {
-        setTitle( title );
-        form = new FormStyleLayout( image,
-                                    title );
-        add( uiBinder.createAndBindUi( this ) );
-    }
-
-    public FormStylePopup( final ImageResource image,
-                           final String title ) {
-        setTitle( title );
-        form = new FormStyleLayout( image,
-                                    title );
-        add( uiBinder.createAndBindUi( this ) );
     }
 
     public void clear() {
         this.form.clear();
     }
 
-    public int addAttribute( final String label,
-                             final IsWidget wid ) {
-        return form.addAttribute( label,
-                                  wid );
+    public void addAttribute( final String label,
+                              final IsWidget wid ) {
+        form.addAttribute( label, wid );
     }
 
-    public int addAttribute( final String label,
-                             final Widget wid,
-                             final boolean isVisible ) {
-        return form.addAttribute( label,
+    public void addAttribute( final String label,
+                              final Widget wid,
+                              final boolean isVisible ) {
+      /*  return form.addAttribute( label,
                                   wid,
-                                  isVisible );
+                                  isVisible );*/
     }
 
-    public int addRow( final Widget wid ) {
-        return form.addRow( wid );
+    public void addRow( final Widget wid ) {
+//        return form.addRow( wid );
     }
 
     /**
@@ -93,8 +76,8 @@ public class FormStylePopup extends BaseModal {
      */
     public void setAttributeVisibility( final int row,
                                         final boolean isVisible ) {
-        form.setAttributeVisibility( row,
-                                     isVisible );
+//        form.setAttributeVisibility( row,
+//                                     isVisible );
     }
 
 }

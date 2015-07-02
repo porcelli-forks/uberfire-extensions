@@ -1,21 +1,22 @@
 package org.uberfire.ext.layout.editor.client.structure;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import org.uberfire.ext.layout.editor.client.util.LayoutDragComponent;
 
 public class RowEditorWidgetUI implements EditorWidget {
 
     private final EditorWidget parent;
-    private final FlowPanel container;
+    private final ComplexPanel container;
     private List<String> rowSpans = new ArrayList<String>();
 
     private List<EditorWidget> columnEditors = new ArrayList<EditorWidget>();
 
     public RowEditorWidgetUI( EditorWidget parent,
-                              FlowPanel container,
+                              ComplexPanel container,
                               String rowSpamString ) {
         this.parent = parent;
         this.container = container;
@@ -24,7 +25,7 @@ public class RowEditorWidgetUI implements EditorWidget {
     }
 
     public RowEditorWidgetUI( EditorWidget parent,
-                              FlowPanel container,
+                              ComplexPanel container,
                               List<String> rowSpans ) {
         this.parent = parent;
         this.container = container;
@@ -32,7 +33,7 @@ public class RowEditorWidgetUI implements EditorWidget {
         parent.addChild( this );
     }
 
-    public FlowPanel getWidget() {
+    public ComplexPanel getWidget() {
         return container;
     }
 
@@ -42,9 +43,7 @@ public class RowEditorWidgetUI implements EditorWidget {
 
     private void parseRowSpanString( String rowSpamString ) {
         String[] spans = rowSpamString.split( " " );
-        for ( String span : spans ) {
-            rowSpans.add( span );
-        }
+        Collections.addAll( rowSpans, spans );
     }
 
     public void addChild( EditorWidget columnEditor ) {

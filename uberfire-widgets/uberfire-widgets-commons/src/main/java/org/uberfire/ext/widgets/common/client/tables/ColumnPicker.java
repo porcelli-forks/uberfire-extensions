@@ -16,11 +16,12 @@
 
 package org.uberfire.ext.widgets.common.client.tables;
 
-import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.CheckBox;
-import com.github.gwtbootstrap.client.ui.DataGrid;
-import com.github.gwtbootstrap.client.ui.constants.IconType;
-import com.github.gwtbootstrap.client.ui.resources.ButtonSize;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -30,15 +31,15 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.CheckBox;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
+import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.constants.Toggle;
+import org.gwtbootstrap3.client.ui.gwt.DataGrid;
 import org.uberfire.ext.services.shared.preferences.GridColumnPreference;
 import org.uberfire.ext.services.shared.preferences.GridPreferencesStore;
+import org.uberfire.ext.widgets.common.client.resources.CommonResources;
 import org.uberfire.ext.widgets.common.client.resources.i18n.CommonConstants;
 
 public class ColumnPicker<T> {
@@ -57,7 +58,7 @@ public class ColumnPicker<T> {
 
 
     public ColumnPicker(DataGrid<T> dataGrid) {
-        this.dataGrid = dataGrid;
+        this( dataGrid, null );
     }
 
     public void addColumnChangedHandler(ColumnChangedHandler handler) {
@@ -130,11 +131,12 @@ public class ColumnPicker<T> {
 
     public Button createToggleButton() {
         final Button button = new Button();
-        button.setToggle(true);
-        button.setIcon(IconType.LIST_UL);
+        button.addStyleName( CommonResources.INSTANCE.CSS().columnPickerButton() );
+        button.setDataToggle( Toggle.BUTTON );
+        button.setIcon( IconType.LIST_UL );
         button.setTitle( CommonConstants.INSTANCE.ColumnPickerButtonTooltip() );
 
-        popup.getElement().getStyle().setZIndex(Integer.MAX_VALUE);
+        popup.addStyleName( CommonResources.INSTANCE.CSS().columnPickerPopup() );
         popup.addAutoHidePartner(button.getElement());
         popup.addCloseHandler(new CloseHandler<PopupPanel>() {
             public void onClose(CloseEvent<PopupPanel> popupPanelCloseEvent) {
@@ -144,16 +146,16 @@ public class ColumnPicker<T> {
             }
         });
 
-        button.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                if (!button.isActive()) {
-                    showColumnPickerPopup(button.getAbsoluteLeft() + button.getOffsetWidth(),
-                            button.getAbsoluteTop() + button.getOffsetHeight());
+        button.addClickHandler( new ClickHandler() {
+            public void onClick( ClickEvent event ) {
+                if ( !button.isActive() ) {
+                    showColumnPickerPopup( button.getAbsoluteLeft() + button.getOffsetWidth(),
+                            button.getAbsoluteTop() + button.getOffsetHeight() );
                 } else {
-                    popup.hide(false);
+                    popup.hide( false );
                 }
             }
-        });
+        } );
         return button;
     }
 
@@ -188,7 +190,7 @@ public class ColumnPicker<T> {
 
         if (gridPreferences != null) {
             Button resetButton = new Button("Reset");
-            resetButton.setSize(ButtonSize.MINI);
+            resetButton.setSize( ButtonSize.EXTRA_SMALL);
             resetButton.addClickHandler(new ClickHandler() {
 
                 @Override
