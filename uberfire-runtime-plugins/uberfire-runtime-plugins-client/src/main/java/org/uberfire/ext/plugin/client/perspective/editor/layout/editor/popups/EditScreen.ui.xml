@@ -23,27 +23,41 @@
              xmlns:uf='urn:import:org.uberfire.ext.properties.editor.client'>
 
 
+  <ui:with field='res' type='org.uberfire.ext.plugin.client.resources.WebAppResource'/>
+
+
   <ui:with field="i18n" type="org.uberfire.ext.plugin.client.resources.i18n.CommonConstants"/>
 
-  <g:HTMLPanel>
+  <b:Panel>
     <b:PanelGroup ui:field="accordion">
-      <b:PanelHeader text="{i18n.AddNewParameter}" dataToggle="COLLAPSE" ui:field="header" />
+      <b:PanelHeader text="{i18n.AddNewParameter}" dataToggle="COLLAPSE" ui:field="header"/>
       <b:PanelCollapse ui:field="paramAccordion">
         <b:PanelBody>
           <b:FormGroup ui:field="paramKeyControlGroup">
-            <b:TextBox ui:field="key" placeholder="{i18n.ParamKey}"/>
-            <b:TextBox ui:field="value" placeholder="{i18n.ParamValue}"/>
             <b:HelpBlock ui:field="paramKeyInline"/>
+            <b:FormLabel for="key" addStyleNames="col-lg-3" text="{i18n.ParamKey}"/>
+            <g:FlowPanel addStyleNames="col-lg-9">
+              <b:TextBox ui:field="key" placeholder="{i18n.ParamKeyPlaceHolder}"/>
+            </g:FlowPanel>
           </b:FormGroup>
-          <b:Button icon="SAVE" type="PRIMARY" ui:field="add">
+
+          <b:FormGroup>
+            <b:FormLabel for="value" addStyleNames="col-lg-3" text="{i18n.ParamValue}"/>
+            <g:FlowPanel addStyleNames="col-lg-9">
+              <b:TextBox ui:field="value" placeholder="{i18n.ParamValuePlaceHolder}" addStyleNames="col-sm-9"/>
+            </g:FlowPanel>
+          </b:FormGroup>
+
+          <b:Button type="PRIMARY" ui:field="add" addStyleNames="{res.CSS.buttonAddParameter}">
             <ui:text from="{i18n.Add}"/>
           </b:Button>
+
         </b:PanelBody>
       </b:PanelCollapse>
     </b:PanelGroup>
 
     <uf:PropertyEditorWidget ui:field="propertyEditor"/>
 
-  </g:HTMLPanel>
+  </b:Panel>
 
 </ui:UiBinder>

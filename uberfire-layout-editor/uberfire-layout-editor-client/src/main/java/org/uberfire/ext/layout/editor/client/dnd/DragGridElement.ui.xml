@@ -20,14 +20,9 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
-  <ui:style>
-    .center {
-      text-align: center;
-    }
-  </ui:style>
   <g:FlowPanel>
     <b:InputGroup ui:field="move">
-      <b:InputGroupAddon icon="ARROWS" styleName="{style.center}"/>
+      <b:InputGroupAddon icon="ARROWS"/>
     </b:InputGroup>
   </g:FlowPanel>
 </ui:UiBinder>

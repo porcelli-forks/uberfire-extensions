@@ -30,6 +30,8 @@ public interface PluginCss extends CssResource {
 
     String top();
 
+    String buttonAddParameter();
+
     @ClassName("window-label")
     String windowLabel();
 

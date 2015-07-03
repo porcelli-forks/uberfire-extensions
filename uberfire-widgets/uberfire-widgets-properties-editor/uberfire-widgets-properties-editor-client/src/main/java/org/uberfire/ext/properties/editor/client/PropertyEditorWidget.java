@@ -27,9 +27,6 @@ public class PropertyEditorWidget extends Composite {
     PropertyEditorEvent originalEvent;
 
     @UiField
-    HTMLPanel filterPanel;
-
-    @UiField
     TextBox filterBox;
 
     @UiField
@@ -81,7 +78,4 @@ public class PropertyEditorWidget extends Composite {
         this.lastOpenAccordionGroupTitle = lastOpenAccordionGroupTitle;
     }
 
-    public void setFilterPanelVisible( boolean visible ) {
-        filterPanel.setVisible( visible );
-    }
 }

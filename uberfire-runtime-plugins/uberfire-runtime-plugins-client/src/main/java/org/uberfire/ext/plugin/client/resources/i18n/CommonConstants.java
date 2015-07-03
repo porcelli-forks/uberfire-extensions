@@ -47,7 +47,11 @@ public interface CommonConstants
 
     String ParamKey();
 
+    String ParamKeyPlaceHolder();
+
     String ParamValue();
+
+    String ParamValuePlaceHolder();
 
     String InvalidGridConfiguration();
 

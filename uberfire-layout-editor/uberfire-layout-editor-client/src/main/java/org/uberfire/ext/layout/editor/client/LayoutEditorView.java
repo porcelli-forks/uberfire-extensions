@@ -103,6 +103,7 @@ public class LayoutEditorView extends Composite
 
     @Override
     public void setupGridSystem( LayoutDragComponent... layoutDragComponents ) {
+        gridSystem.clear();
         for ( LayoutDragComponent layoutDragComponent : layoutDragComponents ) {
             gridSystem.add( new DragGridElement( layoutDragComponent ) );
         }
@@ -110,6 +111,7 @@ public class LayoutEditorView extends Composite
 
     @Override
     public void setupComponents( LayoutDragComponent... layoutDragComponents ) {
+        components.clear();
         for ( LayoutDragComponent layoutDragComponent : layoutDragComponents ) {
             components.add( new DragGridElement( layoutDragComponent ) );
         }

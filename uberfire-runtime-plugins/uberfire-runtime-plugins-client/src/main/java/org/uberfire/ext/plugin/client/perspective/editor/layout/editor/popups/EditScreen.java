@@ -94,7 +94,6 @@ public class EditScreen
     interface Binder
             extends
             UiBinder<Widget, EditScreen> {
-
     }
 
     private static Binder uiBinder = GWT.create( Binder.class );
@@ -226,6 +225,7 @@ public class EditScreen
                 return null;
             }
         }
+
 
         layoutEditorPluginAPI.addLayoutComponentProperty( parent, key.getText(), value.getText() );
         return defaultScreenProperties();
