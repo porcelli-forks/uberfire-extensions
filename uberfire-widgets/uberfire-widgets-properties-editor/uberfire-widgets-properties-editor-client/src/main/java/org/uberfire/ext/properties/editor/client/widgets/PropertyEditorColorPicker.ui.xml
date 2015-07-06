@@ -5,7 +5,7 @@
   <g:FlowPanel>
     <b:InputGroup>
       <b:InputGroupAddon ui:field="icon" icon="EDIT"/>
-      <b:TextBox ui:field="colorTextBox" addStyleNames="col-md-12 controls" />
+      <b:TextBox ui:field="colorTextBox"  />
     </b:InputGroup>
   </g:FlowPanel>
 </ui:UiBinder>

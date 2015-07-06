@@ -29,6 +29,10 @@ public class PropertyEditorTextBox extends AbstractPropertyEditorWidget {
         textBox.setText( text );
     }
 
+    public void setId( String id ) {
+//        textBox.setId( id );
+    }
+
     public String getText() {
         return textBox.getText();
     }

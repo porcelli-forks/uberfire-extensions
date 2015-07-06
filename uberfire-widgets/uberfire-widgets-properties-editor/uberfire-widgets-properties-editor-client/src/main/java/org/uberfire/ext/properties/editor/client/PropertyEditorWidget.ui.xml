@@ -9,6 +9,24 @@
         <b:Button icon="RETWEET" ui:field="reload"/>
       </b:InputGroupButton>
     </b:InputGroup>
-    <b:PanelGroup ui:field='propertyMenu'/>
+    <b:Panel>
+      <b:PanelGroup ui:field='propertyMenu'>
+
+        <!--<b:PanelHeader text="meh" dataToggle="COLLAPSE" />-->
+        <!--<b:PanelCollapse >-->
+          <!--<b:PanelBody>-->
+
+            <!--&lt;!&ndash;<b:FormGroup>&ndash;&gt;-->
+              <!--&lt;!&ndash;<b:FormLabel for="value" addStyleNames="col-lg-3" text="434"/>&ndash;&gt;-->
+              <!--&lt;!&ndash;<g:FlowPanel addStyleNames="col-lg-9">&ndash;&gt;-->
+                <!--&lt;!&ndash;<b:TextBox  placeholder="344334" addStyleNames="col-sm-9"/>&ndash;&gt;-->
+              <!--&lt;!&ndash;</g:FlowPanel>&ndash;&gt;-->
+            <!--&lt;!&ndash;</b:FormGroup>&ndash;&gt;-->
+
+
+          <!--</b:PanelBody>-->
+        <!--</b:PanelCollapse>-->
+      </b:PanelGroup>
+    </b:Panel>
   </g:HTMLPanel>
 </ui:UiBinder>
