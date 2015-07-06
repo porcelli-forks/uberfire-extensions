@@ -43,12 +43,6 @@ public class PropertyEditorHelper {
         }
     }
 
-    public static void extractEditorFrom( final PropertyEditorWidget propertyEditorWidget,
-                                          final PanelGroup propertyMenu,
-                                          final PropertyEditorEvent event ) {
-        extractEditorFrom( propertyEditorWidget, propertyMenu, event, "" );
-    }
-
     static void createCategory( final PropertyEditorWidget propertyEditorWidget,
                                 final PanelGroup propertyMenu,
                                 final PropertyEditorCategory category,
@@ -69,6 +63,12 @@ public class PropertyEditorHelper {
         if ( categoryHasActiveChilds ) {
             propertyMenu.add( categoryPanel );
         }
+    }
+
+    public static void extractEditorFrom( final PropertyEditorWidget propertyEditorWidget,
+                                          final PanelGroup propertyMenu,
+                                          final PropertyEditorEvent event ) {
+        extractEditorFrom( propertyEditorWidget, propertyMenu, event, "" );
     }
 
     static Panel createPanel( final PanelGroup propertyMenu,

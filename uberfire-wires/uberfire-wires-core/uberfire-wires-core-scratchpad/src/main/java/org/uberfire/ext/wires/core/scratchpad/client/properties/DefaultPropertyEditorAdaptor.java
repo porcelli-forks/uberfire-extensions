@@ -15,6 +15,7 @@
  */
 package org.uberfire.ext.wires.core.scratchpad.client.properties;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 
@@ -72,13 +73,21 @@ public class DefaultPropertyEditorAdaptor implements PropertyEditorAdaptor {
             }
         };
 
+        final PropertyEditorFieldInfo fieldInfo3 = new PropertyEditorFieldInfo( "boolean", PropertyEditorType.BOOLEAN );
+        final PropertyEditorFieldInfo fieldInfo4 = new PropertyEditorFieldInfo( "color", PropertyEditorType.COLOR );
+        List<String> list = new ArrayList<String>(  );
+        list.add( "One" );
+        list.add( "Two" );
+        final PropertyEditorFieldInfo fieldInfo5 = new PropertyEditorFieldInfo( "combo", PropertyEditorType.COMBO ).withComboValues(list );
+        final PropertyEditorFieldInfo fieldInfo6 = new PropertyEditorFieldInfo( "secret", PropertyEditorType.SECRET_TEXT );
+
         //Setup Validators
         fieldInfo1.getValidators().clear();
         fieldInfo2.getValidators().clear();
         fieldInfo1.getValidators().add( new DoubleValidator() );
         fieldInfo2.getValidators().add( new DoubleValidator() );
 
-        final PropertyEditorCategory position = new PropertyEditorCategory( POSITION_NODE ).withField( fieldInfo1 ).withField( fieldInfo2 );
+        final PropertyEditorCategory position = new PropertyEditorCategory( POSITION_NODE ).withField( fieldInfo1 ).withField( fieldInfo2 ).withField( fieldInfo3 ).withField( fieldInfo4 ).withField( fieldInfo5 ).withField( fieldInfo6 );
 
         return Lists.newArrayList( position );
     }
