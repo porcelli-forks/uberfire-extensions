@@ -48,18 +48,10 @@ public class PropertyEditorHelper {
                                 final PropertyEditorCategory category,
                                 final String propertyNameFilter ) {
 
-//        final Panel categoryPanel = createPanel( propertyMenu, propertyEditorWidget, category );
         PanelCollapse panelCollapse = createPanelCollapse( propertyEditorWidget, category );
         PanelHeader headerPanel = createPanelHeader( category, propertyMenu, panelCollapse );
         PanelBody panelBody = createPanelBody();
 
-        panelCollapse.add( panelBody );
-
-        propertyMenu.add( headerPanel );
-        propertyMenu.add( panelCollapse );
-
-
-       /* final PanelBody panelBody = (PanelBody) ( (PanelCollapse) categoryPanel.getWidget( 1 ) ).getWidget( 0 );*/
 
         boolean categoryHasActiveChilds = false;
         for ( final PropertyEditorFieldInfo field : category.getFields() ) {
@@ -70,9 +62,12 @@ public class PropertyEditorHelper {
                                                   panelBody ) );
             }
         }
-//        if ( categoryHasActiveChilds ) {
-//            propertyMenu.add( categoryPanel );
-//        }
+        if ( categoryHasActiveChilds ) {
+            panelCollapse.add( panelBody );
+            propertyMenu.add( headerPanel );
+            propertyMenu.add( panelCollapse );
+        }
+
     }
 
     static PanelHeader createPanelHeader( final PropertyEditorCategory category,
@@ -89,7 +84,6 @@ public class PropertyEditorHelper {
     static PanelCollapse createPanelCollapse( final PropertyEditorWidget propertyEditorWidget,
                                               final PropertyEditorCategory category ) {
         final PanelCollapse collapse = GWT.create( PanelCollapse.class );
-        //TODO ederign -> take care of this handlers
         collapse.addShowHandler( new ShowHandler() {
             @Override
             public void onShow( ShowEvent showEvent ) {
@@ -106,52 +100,12 @@ public class PropertyEditorHelper {
             collapse.setIn( true );
         }
 
-//        collapse.add( new PanelBody() );
         return collapse;
     }
 
     private static PanelBody createPanelBody() {
         return GWT.create( PanelBody.class );
     }
-
-//    static Panel createPanel( final PanelGroup propertyMenu,
-//                              final PropertyEditorWidget propertyEditorWidget,
-//                              final PropertyEditorCategory category ) {
-//        final Panel categoryPanel = GWT.create( Panel.class );
-//
-//        final PanelCollapse collapse = new PanelCollapse();
-//        {
-//            collapse.addShowHandler( new ShowHandler() {
-//                @Override
-//                public void onShow( ShowEvent showEvent ) {
-//                    propertyEditorWidget.setLastOpenAccordionGroupTitle( category.getName() );
-//                }
-//            } );
-//            collapse.addHiddenHandler( new HiddenHandler() {
-//                @Override
-//                public void onHidden( HiddenEvent hiddenEvent ) {
-//                    hiddenEvent.stopPropagation();
-//                }
-//            } );
-//            if ( propertyEditorWidget.getLastOpenAccordionGroupTitle().equals( category.getName() ) ) {
-//                collapse.setIn( true );
-//            }
-//
-//            collapse.add( new PanelBody() );
-//        }
-////        final PanelHeader header = new PanelHeader();
-////        {
-////            header.setText( category.getName() );
-////            header.setDataToggle( Toggle.COLLAPSE );
-////            header.setDataParent( propertyMenu.getId() );
-////            header.setDataTargetWidget( collapse );
-////        }
-//
-////        categoryPanel.add( header );
-//        categoryPanel.add( collapse );
-//
-//        return categoryPanel;
-//    }
 
     public static void extractEditorFrom( final PropertyEditorWidget propertyEditorWidget,
                                           final PanelGroup propertyMenu,
@@ -168,23 +122,6 @@ public class PropertyEditorHelper {
         items.add( createField( field, items, category, panelBody ) );
 
         return items;
-    }
-
-    private static Widget createButtons( final PropertyEditorFieldInfo field,
-                                         final PropertyEditorCategory category,
-                                         final PropertyEditorItemsWidget items,
-                                         final PanelBody categoryPanel ) {
-        final PropertyEditorItemButtons button = GWT.create( PropertyEditorItemButtons.class );
-        if ( field.isRemovalSupported() ) {
-            button.addRemovalButton( new ClickHandler() {
-                @Override
-                public void onClick( ClickEvent event ) {
-                    category.getFields().remove( field );
-                    categoryPanel.remove( items );
-                }
-            } );
-        }
-        return button;
     }
 
     static PropertyEditorItemLabel createLabel( final PropertyEditorFieldInfo field ) {
@@ -262,21 +199,6 @@ public class PropertyEditorHelper {
                                                    Widget widget ) {
         AbstractPropertyEditorWidget abstractPropertyEditorWidget = (AbstractPropertyEditorWidget) widget;
         abstractPropertyEditorWidget.setParent( parent );
-    }
-
-    static PropertyEditorItemButtons createRemovalButton( final PropertyEditorFieldInfo field,
-                                                          final PropertyEditorCategory category,
-                                                          final PropertyEditorItemsWidget items,
-                                                          final PanelBody categoryPanel ) {
-        final PropertyEditorItemButtons button = new PropertyEditorItemButtons();
-        button.addClickHandler( new ClickHandler() {
-            @Override
-            public void onClick( ClickEvent event ) {
-                category.getFields().remove( field );
-                categoryPanel.remove( items );
-            }
-        } );
-        return button;
     }
 
     public static boolean validade( PropertyEditorEvent event ) {

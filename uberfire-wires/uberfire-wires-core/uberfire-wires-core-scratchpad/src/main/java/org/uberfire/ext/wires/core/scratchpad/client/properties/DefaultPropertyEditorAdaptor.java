@@ -15,16 +15,13 @@
  */
 package org.uberfire.ext.wires.core.scratchpad.client.properties;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.Window;
 import org.uberfire.ext.properties.editor.model.PropertyEditorCategory;
 import org.uberfire.ext.properties.editor.model.PropertyEditorFieldInfo;
 import org.uberfire.ext.properties.editor.model.PropertyEditorType;
-import org.uberfire.ext.properties.editor.model.validators.PropertyFieldValidator;
 import org.uberfire.ext.wires.core.api.properties.PropertyEditorAdaptor;
 import org.uberfire.ext.wires.core.api.shapes.WiresBaseShape;
 import org.uberfire.ext.wires.core.client.properties.DoubleValidator;
@@ -59,7 +56,7 @@ public class DefaultPropertyEditorAdaptor implements PropertyEditorAdaptor {
                 }
             }
         };
-         PropertyEditorFieldInfo fieldInfo2 = new PropertyEditorFieldInfo( "Y",
+        final PropertyEditorFieldInfo fieldInfo2 = new PropertyEditorFieldInfo( "Y",
                                                                                 String.valueOf( shape.getY() ),
                                                                                 PropertyEditorType.NATURAL_NUMBER ) {
             @Override
@@ -73,41 +70,7 @@ public class DefaultPropertyEditorAdaptor implements PropertyEditorAdaptor {
                     //Swallow
                 }
             }
-        }.withHelpInfo( "Title", "Eu sou uma ajuda" );
-
-        final PropertyEditorFieldInfo fieldInfo3 = new PropertyEditorFieldInfo( "boolean", PropertyEditorType.BOOLEAN ).withValidators( new PropertyFieldValidator() {
-            @Override
-            public boolean validate( Object value ) {
-                if ( Boolean.parseBoolean( value.toString() ) ) {
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            public String getValidatorErrorMessage() {
-                return "Teste";
-            }
-        } );
-        final PropertyEditorFieldInfo fieldInfo4 = new PropertyEditorFieldInfo( "color", PropertyEditorType.COLOR );
-        List<String> list = new ArrayList<String>();
-        list.add( "One" );
-        list.add( "Two" );
-        final PropertyEditorFieldInfo fieldInfo5 = new PropertyEditorFieldInfo( "combo", PropertyEditorType.COMBO ).withComboValues( list );
-        final PropertyEditorFieldInfo fieldInfo6 = new PropertyEditorFieldInfo( "secret", PropertyEditorType.SECRET_TEXT ).withValidators( new PropertyFieldValidator() {
-            @Override
-            public boolean validate( Object value ) {
-                if ( value.toString().length() < 3 ) {
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            public String getValidatorErrorMessage() {
-                return "Erroir";
-            }
-        } ).withRemovalSupported( true );
+        };
 
         //Setup Validators
         fieldInfo1.getValidators().clear();
@@ -115,7 +78,7 @@ public class DefaultPropertyEditorAdaptor implements PropertyEditorAdaptor {
         fieldInfo1.getValidators().add( new DoubleValidator() );
         fieldInfo2.getValidators().add( new DoubleValidator() );
 
-        final PropertyEditorCategory position = new PropertyEditorCategory( POSITION_NODE ).withField( fieldInfo1 ).withField( fieldInfo2 ).withField( fieldInfo3 ).withField( fieldInfo4 ).withField( fieldInfo6 ).withField( fieldInfo5 );
+        final PropertyEditorCategory position = new PropertyEditorCategory( POSITION_NODE ).withField( fieldInfo1 ).withField( fieldInfo2 );
 
         return Lists.newArrayList( position );
     }
