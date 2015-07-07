@@ -22,24 +22,32 @@
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 
   <ui:with field="i18n" type="org.uberfire.ext.plugin.client.resources.i18n.CommonConstants"/>
+  <ui:with field='res' type='org.uberfire.ext.plugin.client.resources.WebAppResource'/>
+
 
   <b:Form>
     <b:FormGroup ui:field="tagControlGroup">
-      <b:FormLabel for="tag" addStyleNames="col-sm-3">
-        <ui:text from="{i18n.TagName}"/>
-      </b:FormLabel>
-      <b:TextBox ui:field="tag" placeholder="{i18n.TagNameHolder}"/>
-      <b:Button icon="PLUS" type="PRIMARY" ui:field="addTag">
-        <ui:text from="{i18n.AddTag}"/>
-      </b:Button>
-      <b:HelpBlock ui:field="tagInline"/>
-    </b:FormGroup>
+      <g:FlowPanel addStyleNames="col-sm-3">
+        <b:FormLabel for="tag">
+          <ui:text from="{i18n.TagName}"/>
+        </b:FormLabel>
+        <b:HelpBlock ui:field="tagInline"/>
+      </g:FlowPanel>
+      <g:FlowPanel addStyleNames="col-sm-7">
+        <b:TextBox ui:field="tag" placeholder="{i18n.TagNameHolder}"/>
+      </g:FlowPanel>
+      <g:FlowPanel addStyleNames="col-sm-2">
+        <b:Button icon="PLUS" type="PRIMARY" ui:field="addTag" text="{i18n.AddTag}"/>
+      </g:FlowPanel>
 
+    </b:FormGroup>
     <b:FormGroup>
-      <b:FormLabel>
+      <b:FormLabel addStyleNames="col-sm-12">
         <ui:text from="{i18n.TagLabel}"/>
       </b:FormLabel>
-      <g:HorizontalPanel ui:field="tags"/>
+      <g:FlowPanel addStyleNames="col-sm-12">
+        <g:HorizontalPanel ui:field="tags"/>
+      </g:FlowPanel>
     </b:FormGroup>
   </b:Form>
 
