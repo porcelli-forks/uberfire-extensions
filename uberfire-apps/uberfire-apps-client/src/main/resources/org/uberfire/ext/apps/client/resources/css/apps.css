@@ -1,3 +1,7 @@
+.breadCrumbs{
+    margin-left:20px;
+}
+
 .tile {
     cursor: pointer;
     float: left;
@@ -54,6 +58,7 @@
 .tileIcon {
     font-size: 46px;
     color: rgb(255, 255, 255);
+    margin-top:10px;
 }
 
 .tileIcon:before {
