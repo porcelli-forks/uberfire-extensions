@@ -65,19 +65,16 @@ public class ApplicationScopedProducer {
             ioService = new IOServiceClusterImpl( new IOServiceDotFileImpl( watchService ), clusterServiceFactory );
         }
 
-//        try {
-//            systemFS = configIO.getFileSystem( URI.create( "git://system" ));
-//        }
-//        catch ( Exception e ){
+        try {
+            systemFS = configIO.getFileSystem( URI.create( "git://system" ) );
+        } catch ( Exception e ) {
 
             systemFS = configIO.newFileSystem( URI.create( "git://system" ),
                                                new HashMap<String, Object>() {{
                                                    put( "init", Boolean.TRUE );
                                                    put( "internal", Boolean.TRUE );
                                                }} );
-//            System.out.println("Eder");
-//        }
-//
+        }
 
     }
 
@@ -92,7 +89,6 @@ public class ApplicationScopedProducer {
     public IOService ioService() {
         return ioService;
     }
-
 
     @Produces
     @RequestScoped

@@ -23,34 +23,33 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.FormLabel;
 
-public class FormStyleLayout extends Composite {
+public class FormStyleItem extends Composite {
 
     @UiField
-    FlowPanel formItems;
+    FormLabel label;
+
+    @UiField
+    FlowPanel widget;
 
     interface FormStyleLayoutBinder
             extends
-            UiBinder<Widget, FormStyleLayout> {
+            UiBinder<Widget, FormStyleItem> {
 
     }
 
     private static FormStyleLayoutBinder uiBinder = GWT.create( FormStyleLayoutBinder.class );
 
-    public FormStyleLayout() {
+    public FormStyleItem() {
         initWidget( uiBinder.createAndBindUi( this ) );
     }
 
-    public void addAttribute( String label,
-                              IsWidget widget ) {
-        FormStyleItem formStyleItem = GWT.create( FormStyleItem.class );
-        formStyleItem.setup( label, widget );
-//
-        formItems.add( formStyleItem );
-    }
+    public void setup( String labelText,
+                       IsWidget field ) {
 
-    public void clear() {
-        formItems.clear();
+        label.setText( labelText );
+        widget.add( field );
     }
 
 }

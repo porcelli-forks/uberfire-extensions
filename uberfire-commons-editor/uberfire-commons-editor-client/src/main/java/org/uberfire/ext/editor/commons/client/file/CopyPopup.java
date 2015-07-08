@@ -52,8 +52,7 @@ public class CopyPopup extends FormStylePopup {
     public CopyPopup( final Path path,
                       final Validator validator,
                       final CommandWithFileNameAndCommitMessage command ) {
-        super( CommonImages.INSTANCE.edit(),
-               CommonConstants.INSTANCE.CopyPopupTitle() );
+        super( CommonConstants.INSTANCE.CopyPopupTitle() );
 
         checkNotNull( "validator",
                       validator );

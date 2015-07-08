@@ -36,8 +36,7 @@ public class SavePopUp extends FormStylePopup {
     final private TextBox checkInCommentTextBox = new TextBox();
 
     public SavePopUp( final ParameterizedCommand<String> command ) {
-        super( CommonImages.INSTANCE.edit(),
-               CommonConstants.INSTANCE.SavePopupTitle() );
+        super( CommonConstants.INSTANCE.SavePopupTitle() );
 
         checkNotNull( "command",
                       command );

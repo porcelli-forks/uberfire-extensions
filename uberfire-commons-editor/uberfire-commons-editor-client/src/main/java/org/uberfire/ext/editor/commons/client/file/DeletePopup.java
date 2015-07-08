@@ -34,8 +34,7 @@ public class DeletePopup extends FormStylePopup {
     final private TextBox checkInCommentTextBox = new TextBox();
 
     public DeletePopup( final ParameterizedCommand<String> command ) {
-        super( CommonImages.INSTANCE.edit(),
-               CommonConstants.INSTANCE.DeletePopupTitle() );
+        super(  CommonConstants.INSTANCE.DeletePopupTitle() );
 
         checkNotNull( "command",
                       command );

@@ -52,8 +52,7 @@ public class RenamePopup extends FormStylePopup {
     public RenamePopup( final Path path,
                         final Validator validator,
                         final CommandWithFileNameAndCommitMessage command ) {
-        super( CommonImages.INSTANCE.edit(),
-               CommonConstants.INSTANCE.RenamePopupTitle() );
+        super( CommonConstants.INSTANCE.RenamePopupTitle() );
 
         checkNotNull( "validator",
                       validator );
