@@ -60,7 +60,7 @@
       </b:Column>
       <b:Column size="MD_6">
         <bg:CellTable ui:field="menuItems"
-                      bordered="true" condensed="true" striped="true"/>
+                      bordered="true" condensed="true"/>
       </b:Column>
     </b:Row>
   </g:HTMLPanel>
