@@ -3,7 +3,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
   <g:HTMLPanel>
-    <b:InputGroup>
+    <b:InputGroup ui:field="filterGroup">
       <b:TextBox ui:field="filterBox" placeholder="filter properties..."/>
       <b:InputGroupButton>
         <b:Button icon="RETWEET" ui:field="reload"/>

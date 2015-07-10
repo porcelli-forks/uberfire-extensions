@@ -10,9 +10,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.InputGroup;
 import org.gwtbootstrap3.client.ui.PanelGroup;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.uberfire.ext.properties.editor.model.PropertyEditorEvent;
@@ -25,6 +25,9 @@ public class PropertyEditorWidget extends Composite {
     String lastOpenAccordionGroupTitle = "";
 
     PropertyEditorEvent originalEvent;
+
+    @UiField
+    InputGroup filterGroup;
 
     @UiField
     TextBox filterBox;
@@ -76,6 +79,10 @@ public class PropertyEditorWidget extends Composite {
 
     public void setLastOpenAccordionGroupTitle( String lastOpenAccordionGroupTitle ) {
         this.lastOpenAccordionGroupTitle = lastOpenAccordionGroupTitle;
+    }
+
+    public void setFilterGroupVisible( boolean visible ) {
+        filterGroup.setVisible( visible );
     }
 
 }

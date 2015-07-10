@@ -89,7 +89,4 @@ public interface CommonCss
 
     @ClassName("dataGrid")
     String dataGrid();
-
-    @ClassName("btnFile")
-    String btnFile();
 }
