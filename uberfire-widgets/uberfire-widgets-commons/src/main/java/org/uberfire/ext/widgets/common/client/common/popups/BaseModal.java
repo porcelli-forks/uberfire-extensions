@@ -27,6 +27,7 @@ import org.gwtbootstrap3.client.shared.event.ModalShownEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShownHandler;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.ModalFooter;
 import org.gwtbootstrap3.client.ui.base.button.CloseButton;
 import org.gwtbootstrap3.client.ui.base.modal.ModalContent;
@@ -144,5 +145,11 @@ public class BaseModal extends Modal {
             }
         }
         return false;
+    }
+
+    public void setBody( final Widget widget ){
+        final ModalBody body = new ModalBody();
+        body.add( widget );
+        this.add( body );
     }
 }
