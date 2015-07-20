@@ -141,7 +141,7 @@ public class PagedTable<T>
             pageSizesSelector.addItem( String.valueOf( i ) + " " + CommonConstants.INSTANCE.Items(), String.valueOf( i ) );
             if ( i == pageSize ) {
                 for ( int z = 0; z < pageSizesSelector.getItemCount(); z++ ) {
-                    if ( pageSizesSelector.getValue( i ).equals( String.valueOf( i ) ) ) {
+                    if ( pageSizesSelector.getValue( z ).equals( String.valueOf( i ) ) ) {
                         pageSizesSelector.setSelectedIndex( z );
                         return;
                     }
