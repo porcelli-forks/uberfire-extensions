@@ -23,8 +23,8 @@
 
 
   <b:FormGroup>
-    <b:FormLabel addStyleNames="col-sm-3" ui:field="label"/>
-    <g:FlowPanel addStyleNames="col-sm-9" ui:field="widget"/>
+    <b:FormLabel addStyleNames="col-sm-2" ui:field="label"/>
+    <g:FlowPanel addStyleNames="col-sm-10" ui:field="widget"/>
   </b:FormGroup>
 
 </ui:UiBinder>

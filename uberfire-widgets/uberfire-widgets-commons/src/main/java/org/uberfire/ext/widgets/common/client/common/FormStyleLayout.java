@@ -17,40 +17,22 @@
 package org.uberfire.ext.widgets.common.client.common;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Form;
+import org.gwtbootstrap3.client.ui.constants.FormType;
 
-public class FormStyleLayout extends Composite {
-
-    @UiField
-    FlowPanel formItems;
-
-    interface FormStyleLayoutBinder
-            extends
-            UiBinder<Widget, FormStyleLayout> {
-
-    }
-
-    private static FormStyleLayoutBinder uiBinder = GWT.create( FormStyleLayoutBinder.class );
+public class FormStyleLayout extends Form {
 
     public FormStyleLayout() {
-        initWidget( uiBinder.createAndBindUi( this ) );
+        setType( FormType.HORIZONTAL );
     }
 
-    public void addAttribute( String label,
-                              IsWidget widget ) {
-        FormStyleItem formStyleItem = GWT.create( FormStyleItem.class );
+    public FormStyleItem addAttribute( String label,
+                                       IsWidget widget ) {
+        final FormStyleItem formStyleItem = GWT.create( FormStyleItem.class );
         formStyleItem.setup( label, widget );
-//
-        formItems.add( formStyleItem );
-    }
-
-    public void clear() {
-        formItems.clear();
+        add( formStyleItem );
+        return formStyleItem;
     }
 
 }
