@@ -26,7 +26,6 @@ import org.gwtbootstrap3.client.shared.event.ModalHiddenEvent;
 import org.gwtbootstrap3.client.shared.event.ModalHiddenHandler;
 import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
-import org.gwtbootstrap3.client.ui.ModalBody;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
 import org.uberfire.ext.widgets.common.client.common.popups.footers.ModalFooterOKButton;
 import org.uberfire.ext.widgets.common.client.resources.i18n.CommonConstants;
@@ -52,9 +51,7 @@ public class ErrorPopup extends BaseModal {
     private ErrorPopup() {
         setTitle( CommonConstants.INSTANCE.Error() );
 
-        add( new ModalBody() {{
-            add( uiBinder.createAndBindUi( ErrorPopup.this ) );
-        }} );
+        setBody( uiBinder.createAndBindUi( ErrorPopup.this ) );
         add( new ModalFooterOKButton( new Command() {
             @Override
             public void execute() {
