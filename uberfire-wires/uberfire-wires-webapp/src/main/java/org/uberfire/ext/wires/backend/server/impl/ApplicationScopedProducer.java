@@ -33,6 +33,7 @@ import org.uberfire.io.IOService;
 import org.uberfire.io.impl.IOServiceDotFileImpl;
 import org.uberfire.io.impl.cluster.IOServiceClusterImpl;
 import org.uberfire.java.nio.file.FileSystem;
+import org.uberfire.java.nio.file.FileSystemAlreadyExistsException;
 import org.uberfire.security.authz.AuthorizationManager;
 import org.uberfire.security.impl.authz.RuntimeAuthorizationManager;
 
@@ -46,13 +47,13 @@ public class ApplicationScopedProducer {
     private AuthenticationService authenticationService;
 
     @Inject
-    @Named("clusterServiceFactory")
+    @Named( "clusterServiceFactory" )
     private ClusterServiceFactory clusterServiceFactory;
 
     private IOService ioService;
 
     @Inject
-    @Named("configIO")
+    @Named( "configIO" )
     private IOService configIO;
 
     private FileSystem systemFS;
@@ -65,27 +66,26 @@ public class ApplicationScopedProducer {
             ioService = new IOServiceClusterImpl( new IOServiceDotFileImpl( watchService ), clusterServiceFactory );
         }
 
+        final URI system = URI.create( "git://system" );
         try {
-            systemFS = configIO.getFileSystem( URI.create( "git://system" ) );
-        } catch ( Exception e ) {
-
-            systemFS = configIO.newFileSystem( URI.create( "git://system" ),
-                                               new HashMap<String, Object>() {{
-                                                   put( "init", Boolean.TRUE );
-                                                   put( "internal", Boolean.TRUE );
-                                               }} );
+            systemFS = configIO.newFileSystem( system,
+                    new HashMap<String, Object>() {{
+                        put( "init", Boolean.TRUE );
+                        put( "internal", Boolean.TRUE );
+                    }} );
+        } catch ( FileSystemAlreadyExistsException f ) {
+            systemFS = configIO.getFileSystem( system );
         }
-
     }
 
     @Produces
-    @Named("systemFS")
+    @Named( "systemFS" )
     public FileSystem systemFS() {
         return systemFS;
     }
 
     @Produces
-    @Named("ioStrategy")
+    @Named( "ioStrategy" )
     public IOService ioService() {
         return ioService;
     }
