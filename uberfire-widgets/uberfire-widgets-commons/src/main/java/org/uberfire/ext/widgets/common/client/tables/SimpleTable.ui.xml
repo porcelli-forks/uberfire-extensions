@@ -50,12 +50,12 @@
       <g:cell width="33%" horizontalAlignment="right">
         <g:HorizontalPanel ui:field="rightToolbar">
           <g:FlowPanel width="100%" ui:field="rightActionsToolbar" addStyleNames="{style.rightToolBar}"/>
-          <b:Button ui:field="columnPickerButton" dataToggle="BUTTON" icon="LIST_UL"/>
+          <b:Button ui:field="columnPickerButton" />
         </g:HorizontalPanel>
       </g:cell>
     </g:HorizontalPanel>
     <g:SimplePanel>
-      <bg:DataGrid ui:field="dataGrid" addStyleNames="table table-bordered table-striped table-hover"/>
+      <bg:DataGrid ui:field="dataGrid"/>
     </g:SimplePanel>
   </g:FlowPanel>
 

@@ -20,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -116,7 +117,9 @@ public class SimpleTable<T>
 
         dataGrid = new DataGrid<T>( Integer.MAX_VALUE,
                                     providesKey );
-        this.gridPreferencesStore = new GridPreferencesStore( gridGlobalPreferences );
+        if( gridGlobalPreferences != null ) {
+            this.gridPreferencesStore = new GridPreferencesStore( gridGlobalPreferences );
+        }
         setupGridTable();
     }
 
@@ -130,12 +133,18 @@ public class SimpleTable<T>
     private void setupGridTable() {
         dataGrid.setStriped( true );
         dataGrid.setBordered( true );
+        dataGrid.setHover( true );
         dataGrid.setSkipRowHoverCheck( false );
         dataGrid.setSkipRowHoverStyleUpdate( false );
         dataGrid.setWidth( "100%" );
         dataGrid.setHeight( "300px" );
         dataGrid.addStyleName( CommonResources.INSTANCE.CSS().dataGrid() );
-
+        dataGrid.setRowStyles( new RowStyles<T>() {
+            @Override
+            public String getStyleNames( T row, int rowIndex ) {
+                return CommonResources.INSTANCE.CSS().dataGridRow();
+            }
+        } );
         setEmptyTableWidget();
 
         columnPicker = new ColumnPicker<T>( dataGrid,
@@ -162,8 +171,22 @@ public class SimpleTable<T>
 
         columnPickerButton = columnPicker.createToggleButton();
 
+        //gwtbootstrap3 does not add .table class to header, needs to add it manually.
+        fixTableHeaderStyle( dataGrid.getElement() );
+
+        addDataGridStyles( dataGrid.getElement(), CommonResources.INSTANCE.CSS().dataGridHeader(), CommonResources.INSTANCE.CSS().dataGridContent() );
+
         initWidget( makeWidget() );
     }
+
+    private static native void fixTableHeaderStyle( final JavaScriptObject grid )/*-{
+        $wnd.jQuery( grid ).find( 'table:not(.table)' ).addClass( "table" );
+    }-*/;
+
+    private static native void addDataGridStyles( final JavaScriptObject grid, final String header, final String content )/*-{
+        $wnd.jQuery( grid ).find( 'table:first' ).addClass( header );
+        $wnd.jQuery( grid ).find( 'table:last' ).addClass( content );
+    }-*/;
 
     protected Widget makeWidget() {
         return uiBinder.createAndBindUi( this );

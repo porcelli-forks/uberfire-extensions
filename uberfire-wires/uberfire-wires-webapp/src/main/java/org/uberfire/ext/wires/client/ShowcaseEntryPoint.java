@@ -89,6 +89,11 @@ public class ShowcaseEntryPoint {
             public void execute() {
                 placeManager.goTo( new DefaultPlaceRequest( "AppsPerspective" ) );
             }
+        } ).endMenu().newTopLevelMenu( "Widgets" ).respondsWith( new Command() {
+            @Override
+            public void execute() {
+                placeManager.goTo( new DefaultPlaceRequest( "UFWidgets" ) );
+            }
         } ).endMenu().newTopLevelMenu( "Logout" ).position( MenuPosition.RIGHT ).respondsWith( new Command() {
             @Override
             public void execute() {

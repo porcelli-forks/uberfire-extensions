@@ -143,6 +143,35 @@
     text-overflow: ellipsis;
 }
 
+.dataGridHeader {
+    margin-bottom: 0px;
+}
+
+.dataGridContent {
+    border-top: none;
+}
+
+.dataGridRow:first-child td {
+    border-top: none;
+}
+
+.columnPickerPopup {
+    background-color: #FFFFFF;
+    padding: 5px;
+    border: 1px solid #d1d1d1;
+}
+
+@external .checkbox;
+
+.columnPickerPopup .checkbox {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.columnPickerButton {
+
+}
+
 /* Styles prefixed with uf- are not obfuscated and can be overridden in application stylesheets. */
 @external .btn-file;
 

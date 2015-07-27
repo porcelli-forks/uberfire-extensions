@@ -26,10 +26,6 @@
       margin: 10px;
     }
 
-    .horizontalContainer {
-      height: 32px;
-    }
-
     .leftToolBar {
       float: left;
       text-align: left
@@ -41,13 +37,16 @@
     }
 
     .centerToolBar {
-
       text-align: center
+    }
+
+    .pager {
+      margin: 0px;
     }
   </ui:style>
 
   <g:FlowPanel addStyleNames="{style.dataGridContainer}">
-    <g:HorizontalPanel ui:field="toolbarContainer" width="100%" addStyleNames="{style.horizontalContainer}">
+    <g:HorizontalPanel ui:field="toolbarContainer" width="100%">
       <g:cell width="33%">
         <g:FlowPanel width="100%" ui:field="leftToolbar" addStyleNames="{style.leftToolBar}"></g:FlowPanel>
       </g:cell>
@@ -62,15 +61,14 @@
       </g:cell>
     </g:HorizontalPanel>
     <g:SimplePanel>
-      <bg:DataGrid ui:field="dataGrid" addStyleNames="table table-bordered table-striped table-hover"/>
+      <bg:DataGrid ui:field="dataGrid" />
     </g:SimplePanel>
-    <g:HorizontalPanel width="100%" addStyleNames="{style.horizontalContainer}">
+    <g:HorizontalPanel width="100%">
       <g:cell width="50%" horizontalAlignment="left" verticalAlignment="middle">
         <b:ListBox ui:field="pageSizesSelector" width="100px"/>
       </g:cell>
       <g:cell width="50%" horizontalAlignment="right" verticalAlignment="top">
-        <uf:UberfireSimplePager ui:field="pager"
-                                addStyleNames="pagination pagination-right pull-right {style.horizontalContainer}"/>
+        <uf:UberfireSimplePager ui:field="pager" addStyleNames="pagination pagination-right pull-right {style.pager}"/>
       </g:cell>
     </g:HorizontalPanel>
   </g:FlowPanel>
