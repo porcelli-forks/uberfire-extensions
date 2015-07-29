@@ -8,8 +8,8 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.ResizeLayoutPanel;
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Container;
 import org.uberfire.backend.vfs.Path;
 
 public class DefaultFileEditorView
@@ -18,7 +18,7 @@ public class DefaultFileEditorView
 
     interface DefaultFileEditorViewBinder
             extends
-            UiBinder<ResizeLayoutPanel, DefaultFileEditorView> {
+            UiBinder<Container, DefaultFileEditorView> {
 
     }
 
