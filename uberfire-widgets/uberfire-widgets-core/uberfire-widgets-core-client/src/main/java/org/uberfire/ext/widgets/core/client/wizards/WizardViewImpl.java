@@ -22,16 +22,14 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import org.gwtbootstrap3.client.ui.ModalBody;
+import org.gwtbootstrap3.client.ui.NavPills;
+import org.gwtbootstrap3.client.ui.base.modal.ModalDialog;
 import org.jboss.errai.ioc.client.container.IOCBeanDef;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
@@ -48,10 +46,7 @@ public class WizardViewImpl extends BaseModal
     private SyncBeanManager iocBeanManager;
 
     @UiField
-    protected VerticalPanel sideBar;
-
-    @UiField
-    protected SimplePanel sideBarContainer;
+    protected NavPills sideBar;
 
     @UiField
     protected SimplePanel body;
@@ -112,9 +107,7 @@ public class WizardViewImpl extends BaseModal
                 }
         );
 
-        add( new ModalBody() {{
-            add( uiBinder.createAndBindUi( WizardViewImpl.this ) );
-        }} );
+        setBody( uiBinder.createAndBindUi( WizardViewImpl.this ) );
 
         add( footer );
     }
@@ -171,18 +164,13 @@ public class WizardViewImpl extends BaseModal
     }
 
     public void setPreferredHeight( final int height ) {
-        sideBarContainer.setHeight( height + "px" );
-        bodyContainer.setHeight( height + "px" );
+        if( getWidgetCount() == 1 && getWidget( 0 ) instanceof ModalDialog ){
+            this.getWidget( 0 ).setHeight( height + "px" );
+        }
     }
 
     public void setPreferredWidth( final int width ) {
-        bodyContainer.setWidth( width + "px" );
-        //Sidebar is 200px and GWT-Bootstraps Modal has padding of 15px (left and right)
-        //setWidth(  );
-        int newWidth = width + 230;
-
-        this.getElement().getStyle().setProperty("width", newWidth + "px");
-        this.getElement().getStyle().setProperty("marginLeft", ( -newWidth / 2 ) + "px");
+        setWidth( width + "px" );
     }
 
     public void setPageCompletionState( final int pageIndex,
@@ -198,14 +186,6 @@ public class WizardViewImpl extends BaseModal
     @Override
     public void show() {
         super.show();
-        centerHorizontally( getElement() );
     }
 
-    /**
-     * Centers fixed positioned element horizontally.
-     * @param e Element to center horizontally
-     */
-    private native void centerHorizontally( Element e ) /*-{
-        $wnd.jQuery(e).css("margin-left", (-1 * $wnd.jQuery(e).outerWidth() / 2) + "px");
-    }-*/;
 }
