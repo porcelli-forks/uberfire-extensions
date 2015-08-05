@@ -22,7 +22,6 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.HelpBlock;
-import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ValidationState;
 import org.uberfire.ext.apps.api.Directory;
@@ -55,11 +54,9 @@ public class NewDirectoryPopup
 
     private static Binder uiBinder = GWT.create( Binder.class );
 
-    public NewDirectoryPopup( Directory currentDirectory ) {
+    public NewDirectoryPopup( final Directory currentDirectory ) {
         setTitle( CommonConstants.INSTANCE.CreateDir() );
-        add( new ModalBody() {{
-            add( uiBinder.createAndBindUi( NewDirectoryPopup.this ) );
-        }} );
+        setBody( uiBinder.createAndBindUi( NewDirectoryPopup.this ) );
 
         add( new ModalFooterOKCancelButtons(
                      new Command() {

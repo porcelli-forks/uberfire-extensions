@@ -20,26 +20,22 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
-    >
+        >
 
-  <ui:with field="i18n" type="org.uberfire.ext.apps.client.resources.i18n.CommonConstants"/>
+    <ui:with field="i18n" type="org.uberfire.ext.apps.client.resources.i18n.CommonConstants"/>
 
-  <ui:style>
-    .mandatory-field {
-      color: #FF0000 !important;
-    }
-  </ui:style>
-
-  <g:HTMLPanel>
-    <b:FormGroup ui:field="directoryNameControlGroup">
-      <b:FormLabel for="directoryName">
-        <span class="{style.mandatory-field}">*</span>
-        <ui:text from="{i18n.DirName}"/>
-      </b:FormLabel>
-      <b:TextBox ui:field="directoryName" placeholder="{i18n.DirNameHolder}"/>
-      <b:HelpBlock ui:field="directoryNameInline"/>
-    </b:FormGroup>
-
-  </g:HTMLPanel>
+    <g:HTMLPanel>
+        <b:Form type="HORIZONTAL">
+            <b:FormGroup ui:field="directoryNameControlGroup">
+                <b:Column size="MD_3">
+                    <b:FormLabel for="directoryName" text="{i18n.DirName}" showRequiredIndicator="true"/>
+                </b:Column>
+                <b:Column size="MD_9">
+                    <b:TextBox ui:field="directoryName" placeholder="{i18n.DirNameHolder}"/>
+                    <b:HelpBlock ui:field="directoryNameInline"/>
+                </b:Column>
+            </b:FormGroup>
+        </b:Form>
+    </g:HTMLPanel>
 
 </ui:UiBinder>
