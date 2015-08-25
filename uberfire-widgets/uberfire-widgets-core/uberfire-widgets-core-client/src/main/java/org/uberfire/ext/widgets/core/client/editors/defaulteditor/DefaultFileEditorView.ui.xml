@@ -25,12 +25,17 @@
         .topMargin {
             margin-top: 15px;
         }
+
+        .editor {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
     </ui:style>
 
     <b:Container fluid="true" addStyleNames='{style.topMargin}'>
         <b:Row>
             <b:Column size="MD_12">
-                <defaulteditor:DefaultEditorFileUpload ui:field="fileUpload"/>
+                <defaulteditor:DefaultEditorFileUpload ui:field="fileUpload" addStyleNames="{style.editor}"/>
             </b:Column>
         </b:Row>
         <b:Row>
