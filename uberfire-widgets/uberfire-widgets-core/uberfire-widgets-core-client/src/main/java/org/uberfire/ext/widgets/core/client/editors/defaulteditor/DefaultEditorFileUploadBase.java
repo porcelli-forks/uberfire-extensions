@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.base.form.AbstractForm;
 import org.uberfire.ext.widgets.common.client.common.BusyPopup;
@@ -21,7 +22,7 @@ public abstract class DefaultEditorFileUploadBase
 
     interface DefaultEditorFileUploadBaseBinder
             extends
-            UiBinder<Form, DefaultEditorFileUploadBase> {
+            UiBinder<Widget, DefaultEditorFileUploadBase> {
 
     }
 
