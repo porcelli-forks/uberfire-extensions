@@ -22,7 +22,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.Legend;
-import org.gwtbootstrap3.client.ui.constants.ColumnSize;
 import org.gwtbootstrap3.client.ui.constants.FormType;
 
 public class FormStyleLayout extends Form {
@@ -32,13 +31,13 @@ public class FormStyleLayout extends Form {
     }
 
     public FormStyleLayout( final String title ) {
-        setType( FormType.HORIZONTAL );
+        this();
         add( new Legend( title ) );
     }
 
     public FormStyleLayout( final Image icon,
                             final String title ) {
-        setType( FormType.HORIZONTAL );
+        this();
         add( new Legend() {{
             getElement().appendChild( icon.getElement() );
             getElement().setInnerText( title );
@@ -54,10 +53,9 @@ public class FormStyleLayout extends Form {
     }
 
     public int addRow( final IsWidget widget ) {
-        add( new FormGroup() {{
-            addStyleName( ColumnSize.SM_12.getCssName() );
-            add( widget );
-        }} );
+        final FormGroup formGroup = new FormGroup();
+        formGroup.add( widget );
+        add( formGroup );
         return getWidgetCount() - 1;
     }
 

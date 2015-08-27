@@ -20,7 +20,6 @@ import com.google.gwt.user.client.Window;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.uberfire.ext.editor.commons.client.resources.CommonImages;
 import org.uberfire.ext.editor.commons.client.resources.i18n.CommonConstants;
 import org.uberfire.ext.widgets.common.client.common.popups.FormStylePopup;
 import org.uberfire.ext.widgets.common.client.common.popups.footers.GenericModalFooter;
@@ -43,9 +42,7 @@ public class DeletePopup extends FormStylePopup {
         getElement().getStyle().setZIndex( Integer.MAX_VALUE );
 
         checkInCommentTextBox.setTitle( CommonConstants.INSTANCE.CheckInComment() );
-        checkInCommentTextBox.setWidth( "200px" );
-        addAttribute( CommonConstants.INSTANCE.CheckInCommentColon(),
-                      checkInCommentTextBox );
+        addAttribute( CommonConstants.INSTANCE.CheckInCommentColon(), checkInCommentTextBox );
 
         final GenericModalFooter footer = new GenericModalFooter();
         footer.addButton( CommonConstants.INSTANCE.DeletePopupDelete(),
@@ -60,8 +57,8 @@ public class DeletePopup extends FormStylePopup {
                                   command.execute( checkInCommentTextBox.getText() );
                               }
                           },
-                          IconType.TIMES,
-                          ButtonType.PRIMARY );
+                          IconType.MINUS,
+                          ButtonType.DANGER );
         footer.addButton( CommonConstants.INSTANCE.Cancel(),
                           new Command() {
                               @Override
