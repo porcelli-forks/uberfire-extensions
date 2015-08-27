@@ -21,7 +21,6 @@ import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.uberfire.backend.vfs.Path;
-import org.uberfire.ext.editor.commons.client.resources.CommonImages;
 import org.uberfire.ext.editor.commons.client.resources.i18n.CommonConstants;
 import org.uberfire.ext.editor.commons.client.validation.Validator;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
@@ -65,12 +64,10 @@ public class RenamePopup extends FormStylePopup {
         getElement().getStyle().setZIndex( Integer.MAX_VALUE );
 
         nameTextBox.setTitle( CommonConstants.INSTANCE.NewName() );
-        nameTextBox.setWidth( "200px" );
         addAttribute( CommonConstants.INSTANCE.NewNameColon(),
                       nameTextBox );
 
         checkInCommentTextBox.setTitle( CommonConstants.INSTANCE.CheckInComment() );
-        checkInCommentTextBox.setWidth( "200px" );
         addAttribute( CommonConstants.INSTANCE.CheckInCommentColon(),
                       checkInCommentTextBox );
 
