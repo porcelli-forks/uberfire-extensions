@@ -16,10 +16,9 @@
 
 package org.uberfire.ext.editor.commons.client.file;
 
-import com.google.gwt.user.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.uberfire.ext.editor.commons.client.resources.CommonImages;
 import org.uberfire.ext.editor.commons.client.resources.i18n.CommonConstants;
 import org.uberfire.ext.widgets.common.client.common.popups.FormStylePopup;
 import org.uberfire.ext.widgets.common.client.common.popups.footers.GenericModalFooter;
@@ -38,14 +37,12 @@ public class SavePopUp extends FormStylePopup {
     public SavePopUp( final ParameterizedCommand<String> command ) {
         super( CommonConstants.INSTANCE.SavePopupTitle() );
 
-        checkNotNull( "command",
-                      command );
+        checkNotNull( "command", command );
 
         //Make sure it appears on top of other popups
         getElement().getStyle().setZIndex( Integer.MAX_VALUE );
 
         checkInCommentTextBox.setTitle( CommonConstants.INSTANCE.CheckInComment() );
-        checkInCommentTextBox.setWidth( "200px" );
         addAttribute( CommonConstants.INSTANCE.CheckInCommentColon(),
                       checkInCommentTextBox );
 

@@ -23,9 +23,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.FormLabel;
-import org.gwtbootstrap3.client.ui.constants.ColumnSize;
 
 public class FormStyleItem extends Composite {
 
@@ -45,7 +43,6 @@ public class FormStyleItem extends Composite {
 
     public FormStyleItem() {
         initWidget( uiBinder.createAndBindUi( this ) );
-        label.addStyleName( ColumnSize.SM_2.getCssName() );
     }
 
     public void setup( final String labelText,
