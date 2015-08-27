@@ -21,10 +21,13 @@
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-
-  <b:FormGroup>
-    <b:FormLabel addStyleNames="col-sm-2" ui:field="label"/>
-    <g:FlowPanel addStyleNames="col-sm-10" ui:field="group"/>
-  </b:FormGroup>
+    <b:FormGroup>
+        <b:Column size="MD_3">
+            <b:FormLabel ui:field="label"/>
+        </b:Column>
+        <b:Column size="MD_9">
+            <g:FlowPanel ui:field="group"/>
+        </b:Column>
+    </b:FormGroup>
 
 </ui:UiBinder>
