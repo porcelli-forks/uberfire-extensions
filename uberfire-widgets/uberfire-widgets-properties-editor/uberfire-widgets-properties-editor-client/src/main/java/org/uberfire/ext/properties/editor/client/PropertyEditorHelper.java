@@ -8,14 +8,18 @@ import org.gwtbootstrap3.client.shared.event.HiddenEvent;
 import org.gwtbootstrap3.client.shared.event.HiddenHandler;
 import org.gwtbootstrap3.client.shared.event.ShowEvent;
 import org.gwtbootstrap3.client.shared.event.ShowHandler;
+import org.gwtbootstrap3.client.ui.Column;
+import org.gwtbootstrap3.client.ui.Container;
+import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.InputGroupAddon;
 import org.gwtbootstrap3.client.ui.PanelBody;
 import org.gwtbootstrap3.client.ui.PanelCollapse;
 import org.gwtbootstrap3.client.ui.PanelGroup;
 import org.gwtbootstrap3.client.ui.PanelHeader;
-import org.gwtbootstrap3.client.ui.Popover;
+import org.gwtbootstrap3.client.ui.Row;
+import org.gwtbootstrap3.client.ui.constants.ColumnSize;
+import org.gwtbootstrap3.client.ui.constants.FormType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.gwtbootstrap3.client.ui.constants.Placement;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 import org.jboss.errai.ioc.client.container.IOC;
 import org.jboss.errai.ioc.client.container.IOCBeanDef;
@@ -23,7 +27,6 @@ import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.uberfire.ext.properties.editor.client.fields.AbstractField;
 import org.uberfire.ext.properties.editor.client.fields.PropertyEditorFieldType;
 import org.uberfire.ext.properties.editor.client.widgets.AbstractPropertyEditorWidget;
-import org.uberfire.ext.properties.editor.client.widgets.PropertyEditorItemButtons;
 import org.uberfire.ext.properties.editor.client.widgets.PropertyEditorItemLabel;
 import org.uberfire.ext.properties.editor.client.widgets.PropertyEditorItemWidget;
 import org.uberfire.ext.properties.editor.model.CustomPropertyEditorFieldInfo;
@@ -51,13 +54,13 @@ public class PropertyEditorHelper {
         PanelCollapse panelCollapse = createPanelCollapse( propertyEditorWidget, category );
         PanelHeader headerPanel = createPanelHeader( category, propertyMenu, panelCollapse );
         PanelBody panelBody = createPanelBody();
-
+        Form form = createPanelContent( panelBody );
 
         boolean categoryHasActiveChilds = false;
         for ( final PropertyEditorFieldInfo field : category.getFields() ) {
             if ( isAMatchOfFilter( propertyNameFilter, field ) ) {
                 categoryHasActiveChilds = true;
-                panelBody.add( createItemsWidget( field,
+                form.add( createItemsWidget( field,
                                                   category,
                                                   panelBody ) );
             }
@@ -103,6 +106,20 @@ public class PropertyEditorHelper {
         return collapse;
     }
 
+    private static Form createPanelContent( final PanelBody panelBody ) {
+        final Container container = GWT.create( Container.class );
+        container.setFluid( true );
+        final Row row = GWT.create( Row.class );
+        final Column column = new Column( ColumnSize.MD_12 );
+        final Form form = GWT.create( Form.class );
+        form.setType( FormType.HORIZONTAL );
+        container.add( row );
+        row.add( column );
+        column.add( form );
+        panelBody.add( container );
+        return form;
+    }
+
     private static PanelBody createPanelBody() {
         return GWT.create( PanelBody.class );
     }
@@ -128,6 +145,10 @@ public class PropertyEditorHelper {
         PropertyEditorItemLabel item = GWT.create( PropertyEditorItemLabel.class );
         item.setText( field.getLabel() );
         item.setFor( String.valueOf( field.hashCode() ) );
+        if ( field.hasHelpInfo() ) {
+            item.setHelpTitle( field.getHelpHeading() );
+            item.setHelpContent( field.getHelpText() );
+        }
         return item;
     }
 
@@ -153,22 +174,7 @@ public class PropertyEditorHelper {
             itemWidget.add( createRemoveAddOn( field, category, parent, panelBody ) );
         }
 
-        if ( field.hasHelpInfo() ) {
-            itemWidget.add( createHelp( field ) );
-        }
-
         return itemWidget;
-    }
-
-    private static Widget createHelp( PropertyEditorFieldInfo field ) {
-        final Popover popover = GWT.create( Popover.class );
-        final InputGroupAddon button = GWT.create( InputGroupAddon.class );
-        popover.setTitle( field.getHelpHeading() );
-        popover.setContent( field.getHelpText() );
-        popover.setPlacement( Placement.LEFT );
-        button.setIcon( IconType.QUESTION );
-        popover.add( button );
-        return Widget.asWidgetOrNull( popover );
     }
 
     private static InputGroupAddon createRemoveAddOn( final PropertyEditorFieldInfo field,
