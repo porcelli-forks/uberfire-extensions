@@ -19,9 +19,11 @@ package org.uberfire.ext.widgets.common.client.common;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
+import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.Legend;
+import org.gwtbootstrap3.client.ui.constants.ColumnSize;
 import org.gwtbootstrap3.client.ui.constants.FormType;
 
 public class FormStyleLayout extends Form {
@@ -53,8 +55,20 @@ public class FormStyleLayout extends Form {
     }
 
     public int addRow( final IsWidget widget ) {
-        final FormGroup formGroup = new FormGroup();
-        formGroup.add( widget );
+        final FormGroup formGroup;
+        if ( widget instanceof FormGroup ) {
+            formGroup = (FormGroup) widget;
+        } else {
+            formGroup = new FormGroup();
+            if ( widget instanceof Column ) {
+                formGroup.add( widget );
+            } else {
+                formGroup.add( new Column( ColumnSize.MD_12 ) {{
+                    add( widget );
+                }} );
+            }
+        }
+
         add( formGroup );
         return getWidgetCount() - 1;
     }
