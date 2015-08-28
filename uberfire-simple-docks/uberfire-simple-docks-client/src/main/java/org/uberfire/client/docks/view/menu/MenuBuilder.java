@@ -147,7 +147,7 @@ public class MenuBuilder {
         final ButtonGroup buttonGroup = new ButtonGroup();
         final Button dropdownButton = new Button( caption );
         dropdownButton.setDataToggle( Toggle.DROPDOWN );
-        dropdownButton.setSize( ButtonSize.EXTRA_SMALL );
+        dropdownButton.setSize( ButtonSize.SMALL );
         final DropDownMenu dropDownMenu = new DropDownMenu();
         for ( final Widget _item : widgetList ) {
             dropDownMenu.add( _item );

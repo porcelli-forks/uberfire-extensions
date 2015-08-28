@@ -120,7 +120,7 @@ public class DocksExpandedBar
                                 final ParameterizedCommand<String> deselectCommand ) {
 
         collapse = GWT.create( Button.class );
-        collapse.setSize( ButtonSize.EXTRA_SMALL );
+        collapse.setSize( ButtonSize.SMALL );
         collapse.addClickHandler( new ClickHandler() {
             @Override
             public void onClick( ClickEvent event ) {
