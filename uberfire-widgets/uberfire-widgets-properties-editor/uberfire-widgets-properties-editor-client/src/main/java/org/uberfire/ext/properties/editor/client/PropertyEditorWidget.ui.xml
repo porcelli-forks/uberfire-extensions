@@ -2,31 +2,15 @@
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-  <g:HTMLPanel>
-    <b:InputGroup ui:field="filterGroup">
-      <b:TextBox ui:field="filterBox" placeholder="filter properties..."/>
-      <b:InputGroupButton>
-        <b:Button icon="RETWEET" ui:field="reload"/>
-      </b:InputGroupButton>
-    </b:InputGroup>
-    <b:Panel>
-      <b:PanelGroup ui:field='propertyMenu'>
-
-        <!--<b:PanelHeader text="meh" dataToggle="COLLAPSE" />-->
-        <!--<b:PanelCollapse >-->
-          <!--<b:PanelBody>-->
-
-            <!--&lt;!&ndash;<b:FormGroup>&ndash;&gt;-->
-              <!--&lt;!&ndash;<b:FormLabel for="value" addStyleNames="col-lg-3" text="434"/>&ndash;&gt;-->
-              <!--&lt;!&ndash;<g:FlowPanel addStyleNames="col-lg-9">&ndash;&gt;-->
-                <!--&lt;!&ndash;<b:TextBox  placeholder="344334" addStyleNames="col-sm-9"/>&ndash;&gt;-->
-              <!--&lt;!&ndash;</g:FlowPanel>&ndash;&gt;-->
-            <!--&lt;!&ndash;</b:FormGroup>&ndash;&gt;-->
-
-
-          <!--</b:PanelBody>-->
-        <!--</b:PanelCollapse>-->
-      </b:PanelGroup>
-    </b:Panel>
-  </g:HTMLPanel>
+    <g:HTMLPanel>
+        <b:InputGroup ui:field="filterGroup">
+            <b:TextBox ui:field="filterBox" placeholder="filter properties..."/>
+            <b:InputGroupButton>
+                <b:Button icon="RETWEET" ui:field="reload"/>
+            </b:InputGroupButton>
+        </b:InputGroup>
+        <b:Panel>
+            <b:PanelGroup ui:field='propertyMenu'/>
+        </b:Panel>
+    </g:HTMLPanel>
 </ui:UiBinder>
