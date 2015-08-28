@@ -5,14 +5,12 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-import org.gwtbootstrap3.client.ui.FormLabel;
-import org.gwtbootstrap3.client.ui.html.Paragraph;
+import org.uberfire.client.views.pfly.widgets.FormLabelHelp;
 
 public class PropertyEditorItemLabel extends Composite {
 
     @UiField
-    FormLabel label;
-
+    FormLabelHelp label;
 
     public PropertyEditorItemLabel() {
         initWidget( uiBinder.createAndBindUi( this ) );
@@ -24,6 +22,14 @@ public class PropertyEditorItemLabel extends Composite {
 
     public void setFor(String forValue){
         label.setFor( forValue );
+    }
+
+    public void setHelpTitle( final String title ){
+        label.setHelpTitle( title );
+    }
+
+    public void setHelpContent( final String content ){
+        label.setHelpContent( content );
     }
 
     interface MyUiBinder extends UiBinder<Widget, PropertyEditorItemLabel> {
