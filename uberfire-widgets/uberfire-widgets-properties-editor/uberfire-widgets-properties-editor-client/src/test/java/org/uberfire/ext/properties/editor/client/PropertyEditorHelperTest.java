@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwtmockito.GwtMockitoTestRunner;
+import com.google.gwtmockito.WithClassesToStub;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.PanelGroup;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.uberfire.ext.properties.editor.client.widgets.PropertyEditorItemLabel;
@@ -18,15 +19,16 @@ import org.uberfire.ext.properties.editor.model.PropertyEditorType;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(GwtMockitoTestRunner.class)
+@RunWith( GwtMockitoTestRunner.class )
+@WithClassesToStub( Heading.class )
 public class PropertyEditorHelperTest {
 
-    @Test(expected = PropertyEditorHelper.NullEventException.class)
+    @Test( expected = PropertyEditorHelper.NullEventException.class )
     public void validateNullEventTest() {
         PropertyEditorHelper.validade( null );
     }
 
-    @Test(expected = PropertyEditorHelper.NoPropertiesException.class)
+    @Test( expected = PropertyEditorHelper.NoPropertiesException.class )
     public void validateEventWithNoPropertiesTest() {
         PropertyEditorEvent event = new PropertyEditorEvent( "id", new ArrayList<PropertyEditorCategory>() );
         PropertyEditorHelper.validade( event );
