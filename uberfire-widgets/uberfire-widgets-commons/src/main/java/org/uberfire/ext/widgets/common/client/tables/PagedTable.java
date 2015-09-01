@@ -22,7 +22,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.AsyncDataProvider;
+import com.google.gwt.view.client.AbstractDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.uberfire.ext.services.shared.preferences.GridGlobalPreferences;
@@ -46,7 +46,7 @@ public class PagedTable<T>
     private static Binder uiBinder = GWT.create( Binder.class );
 
     private int pageSize;
-    private AsyncDataProvider<T> dataProvider;
+    private AbstractDataProvider<T> dataProvider;
 
     @UiField
     public UberfireSimplePager pager;
@@ -120,9 +120,13 @@ public class PagedTable<T>
      * Link a data provider to the table
      * @param dataProvider
      */
-    public void setDataProvider( final AsyncDataProvider<T> dataProvider ) {
+    public void setDataProvider( final AbstractDataProvider<T> dataProvider ) {
         this.dataProvider = dataProvider;
         this.dataProvider.addDataDisplay( dataGrid );
+    }
+
+    public AbstractDataProvider<T> getDataProvider(){
+        return dataProvider;
     }
 
     public int getPageSize() {
