@@ -9,8 +9,6 @@
                 <b:Button icon="RETWEET" ui:field="reload"/>
             </b:InputGroupButton>
         </b:InputGroup>
-        <b:Panel>
-            <b:PanelGroup ui:field='propertyMenu'/>
-        </b:Panel>
+        <b:PanelGroup ui:field='propertyMenu'/>
     </g:HTMLPanel>
 </ui:UiBinder>

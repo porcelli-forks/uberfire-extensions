@@ -8,10 +8,13 @@ import org.gwtbootstrap3.client.shared.event.HiddenEvent;
 import org.gwtbootstrap3.client.shared.event.HiddenHandler;
 import org.gwtbootstrap3.client.shared.event.ShowEvent;
 import org.gwtbootstrap3.client.shared.event.ShowHandler;
+import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Form;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.InputGroupAddon;
+import org.gwtbootstrap3.client.ui.Panel;
 import org.gwtbootstrap3.client.ui.PanelBody;
 import org.gwtbootstrap3.client.ui.PanelCollapse;
 import org.gwtbootstrap3.client.ui.PanelGroup;
@@ -19,6 +22,7 @@ import org.gwtbootstrap3.client.ui.PanelHeader;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.constants.ColumnSize;
 import org.gwtbootstrap3.client.ui.constants.FormType;
+import org.gwtbootstrap3.client.ui.constants.HeadingSize;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 import org.jboss.errai.ioc.client.container.IOC;
@@ -51,6 +55,7 @@ public class PropertyEditorHelper {
                                 final PropertyEditorCategory category,
                                 final String propertyNameFilter ) {
 
+        Panel panel = GWT.create( Panel.class );
         PanelCollapse panelCollapse = createPanelCollapse( propertyEditorWidget, category );
         PanelHeader headerPanel = createPanelHeader( category, propertyMenu, panelCollapse );
         PanelBody panelBody = createPanelBody();
@@ -67,8 +72,9 @@ public class PropertyEditorHelper {
         }
         if ( categoryHasActiveChilds ) {
             panelCollapse.add( panelBody );
-            propertyMenu.add( headerPanel );
-            propertyMenu.add( panelCollapse );
+            panel.add( headerPanel );
+            panel.add( panelCollapse );
+            propertyMenu.add( panel );
         }
 
     }
@@ -76,11 +82,18 @@ public class PropertyEditorHelper {
     static PanelHeader createPanelHeader( final PropertyEditorCategory category,
                                           final PanelGroup propertyMenu,
                                           PanelCollapse panelCollapse ) {
+
+        final Heading heading = new Heading( HeadingSize.H4 );
+        final Anchor anchor = GWT.create( Anchor.class );
+        anchor.setText( category.getName() );
+        anchor.setDataToggle( Toggle.COLLAPSE );
+        anchor.setDataParent( propertyMenu.getId() );
+        anchor.setDataTargetWidget( panelCollapse );
+        anchor.addStyleName( "collapsed" );
+        heading.add( anchor );
+
         final PanelHeader header = GWT.create( PanelHeader.class );
-        header.setText( category.getName() );
-        header.setDataToggle( Toggle.COLLAPSE );
-        header.setDataParent( propertyMenu.getId() );
-        header.setDataTargetWidget( panelCollapse );
+        header.add( heading );
         return header;
     }
 
