@@ -117,7 +117,7 @@ public class SimpleTable<T>
 
         dataGrid = new DataGrid<T>( Integer.MAX_VALUE,
                                     providesKey );
-        if( gridGlobalPreferences != null ) {
+        if ( gridGlobalPreferences != null ) {
             this.gridPreferencesStore = new GridPreferencesStore( gridGlobalPreferences );
         }
         setupGridTable();
@@ -141,7 +141,8 @@ public class SimpleTable<T>
         dataGrid.addStyleName( CommonResources.INSTANCE.CSS().dataGrid() );
         dataGrid.setRowStyles( new RowStyles<T>() {
             @Override
-            public String getStyleNames( T row, int rowIndex ) {
+            public String getStyleNames( T row,
+                                         int rowIndex ) {
                 return CommonResources.INSTANCE.CSS().dataGridRow();
             }
         } );
@@ -180,12 +181,14 @@ public class SimpleTable<T>
     }
 
     private static native void fixTableHeaderStyle( final JavaScriptObject grid )/*-{
-        $wnd.jQuery( grid ).find( 'table:not(.table)' ).addClass( "table" );
+        $wnd.jQuery(grid).find('table:not(.table)').addClass("table");
     }-*/;
 
-    private static native void addDataGridStyles( final JavaScriptObject grid, final String header, final String content )/*-{
-        $wnd.jQuery( grid ).find( 'table:first' ).addClass( header );
-        $wnd.jQuery( grid ).find( 'table:last' ).addClass( content );
+    private static native void addDataGridStyles( final JavaScriptObject grid,
+                                                  final String header,
+                                                  final String content )/*-{
+        $wnd.jQuery(grid).find('table:first').addClass(header);
+        $wnd.jQuery(grid).find('table:last').addClass(content);
     }-*/;
 
     protected Widget makeWidget() {
@@ -495,7 +498,7 @@ public class SimpleTable<T>
         columnPickerButton.setVisible( show );
     }
 
-    public void storeColumnToPreferences(){
+    public void storeColumnToPreferences() {
         List<GridColumnPreference> columnsState = columnPicker.getColumnsState();
         gridPreferencesStore.resetGridColumnPreferences();
         for ( GridColumnPreference gcp : columnsState ) {
@@ -504,5 +507,8 @@ public class SimpleTable<T>
         saveGridPreferences();
     }
 
+    public void setAlwaysShowScrollBars( boolean alwaysShowScrollBars ) {
+        dataGrid.setAlwaysShowScrollBars( alwaysShowScrollBars );
+    }
 
 }
