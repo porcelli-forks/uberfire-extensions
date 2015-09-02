@@ -25,9 +25,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.NavPills;
 import org.gwtbootstrap3.client.ui.base.modal.ModalDialog;
 import org.jboss.errai.ioc.client.container.IOCBeanDef;
@@ -49,10 +48,7 @@ public class WizardViewImpl extends BaseModal
     protected NavPills sideBar;
 
     @UiField
-    protected SimplePanel body;
-
-    @UiField
-    protected ScrollPanel bodyContainer;
+    protected Column body;
 
     protected WizardPopupFooter footer;
 
@@ -160,7 +156,8 @@ public class WizardViewImpl extends BaseModal
     }
 
     public void setBodyWidget( final Widget w ) {
-        body.setWidget( w );
+        body.clear();
+        body.add( w );
     }
 
     public void setPreferredHeight( final int height ) {
