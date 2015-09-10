@@ -87,17 +87,15 @@ public class FilterPagedTable<T>
 
     public void removeTab( String gridKey ) {
         int index = getGridIndex( gridKey );
-
         if ( index != -1 ) {
 
             dataGridFilterHashMap.remove( gridKey );
 
-            navTabs.remove( index );
-            tabContent.remove( index );
+            removeTab( index );
             multiGridPreferencesStore.removeTab( gridKey );
             multiGridPreferencesStore.setSelectedGrid( "" );
             if( navTabs.getWidgetCount() > 1 ){
-                selectTab( index - 1 );
+                selectTab( index == 0 ? 0 : index - 1 );
             }
             preferencesService.call().saveUserPreferences( multiGridPreferencesStore );
         }
@@ -221,8 +219,15 @@ public class FilterPagedTable<T>
     }
 
     public void removeTab( int index ){
-        navTabs.remove( index );
-        tabContent.remove( index );
+        if( index < 0 ){
+            return;
+        }
+        if( index < navTabs.getWidgetCount()) {
+            navTabs.remove( index );
+        }
+        if( index < tabContent.getWidgetCount()) {
+            tabContent.remove( index );
+        }
     }
 
     private void addContentTab( final String title, final Widget titleWidget, final Widget content ){
